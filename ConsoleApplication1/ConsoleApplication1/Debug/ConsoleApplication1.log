@@ -1,0 +1,18 @@
+﻿生成启动时间为 2019/9/17 23:36:31。
+     1>项目“F:\比特\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.vcxproj”在节点 2 上(Build 个目标)。
+     1>Link:
+         F:\Program Files\【比特推荐】VS2013_RTM_ULT_CHS-30天试用-需激活\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"F:\比特\ConsoleApplication1\Debug\ConsoleApplication1.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:\比特\ConsoleApplication1\Debug\ConsoleApplication1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:\比特\ConsoleApplication1\Debug\ConsoleApplication1.lib" /MACHINE:X86 Debug\game.obj
+         "Debug\三子棋test.obj"
+         "Debug\作业1.obj"
+         "Debug\作业2.obj"
+         "Debug\作业3和4.obj"
+         "Debug\作业5.obj"
+         "Debug\作业6.obj"
+         "Debug\作业7.obj"
+         "Debug\课堂练习.obj"
+         ConsoleApplication1.vcxproj -> F:\比特\ConsoleApplication1\Debug\ConsoleApplication1.exe
+     1>已完成生成项目“F:\比特\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:01.10

@@ -1,0 +1,3 @@
+﻿1>------ 已启动生成:  项目: ConsoleApplication1, 配置: Debug Win32 ------
+1>  ConsoleApplication1.vcxproj -> F:\比特\ConsoleApplication1\Debug\ConsoleApplication1.exe
+========== 生成:  成功 1 个，失败 0 个，最新 0 个，跳过 0 个 ==========
