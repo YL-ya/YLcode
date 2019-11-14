@@ -38,6 +38,7 @@ void game()
 	if (ret == 'X')
 	{
 		printf("Íæ¼Ò»ñÊ¤£¬ÄãÕæ°ô\n");
+		return;
 	}
 	if (ret == 'O')
 	{
