@@ -1,10 +1,3 @@
-/**
- * Created with IntelliJ IDEA.
- * Description:
- * User: GAOBO
- * Date: 2019-12-01
- * Time: 11:39
- */
 public class TestDemo2 {
 
 
