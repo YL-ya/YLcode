@@ -1,14 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
-/**
- * Created with IntelliJ IDEA.
- * Description:
- * User: GAOBO
- * Date: 2019-12-01
- * Time: 14:39
- */
 class Person implements Cloneable{
     @Override
     protected Object clone() throws CloneNotSupportedException {
