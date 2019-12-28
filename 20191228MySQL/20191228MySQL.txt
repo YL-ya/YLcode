@@ -1,0 +1,169 @@
+2019-12-28：
+##数据库的创建
+（1）创建表进行练习：
+1：create table student(
+     name varchar(20),
+     sn int,
+     mysql double(5,2),
+     java int,
+    english double(5,2)
+     );
+2：create table student(
+     name varchar(20),
+     sn int,
+     first_time datetime, 范围：1000~9999）默认是null
+     graduate_time timestamp, (1970~2038)→UTC(英国本地时间)：GMT（北京时间）默认是系统当前时间
+     mysql double(5,2),
+     java int,
+    english double(5,2)
+     );
+//注意：当出现定义为两种都是timestamp的话需指定默认一个：
+例如：
+create table student(
+     first_time timestamp， 范围：1000~9999）默认是null
+     graduate_time timestamp default ‘2019-01-01 00:00:01’
+	); 
+3：insert into student values ('syl',20191228,'1000-01-01 00:00:01','1970-06-06 12:00:01',100,100,100);
+4：关键字：`select`;用``包着
+5：show variables;
+6：show variables like 'char%';
+7：utf8_general_ci：系统设置是对字符的大小写是不敏感的： show variables like 'collation%';
+
+##数据库的约束
+（2）：约束的讲解：就是用来约束数据库中使得变数据记录符合现实意义
+1：数据完整性
+1.1：实体完整性：primarykey 主码；unique：唯一性
+1.2：参照完整性
+1.3：用户自定义完整性
+create table student1(
+	 name varchar(20) not null,
+     sn int primary key,
+	 telno int unique,唯一性
+     first_time datetime, 范围：1000~9999）默认是null
+     graduate_time timestamp, (1970~2038)→UTC(英国本地时间)：GMT（北京时间）默认是系统当前时间
+     mysql double(5,2),
+     java int,
+    english double(5,2)
+	);
+create table student(
+    -> sn int primary key,//形成主码，具有唯一性
+    -> name varchar(20) not null,//这里的姓名是可以重复的，但是主码是只有一个的
+    -> telno bigint unique,//因为字节有点长所以将int换成bigint(相当于long);
+    -> mysql double(5,2)
+    -> );
+	插入的语句是：insert into student values(20191230,'mj',18729343729,89);
+显示的错误是： Duplicate entry '20191228' for key 'PRIMARY'：表示重复一行错误
+2：check约束：（类似于java中的枚举值）
+
+##数据库的设计
+（3）学生选课系统
+要求：
+1：学生新学期开始能够选课，选择某个老师的课
+2：学生必须要有所有的班级信息
+3：学期末的要录入成绩
+思路：
+1：需求分析：
+1.1：建概念模型
+
+a)确定实体（entity）：客观存在的实体
+实体：学生，老师，课程，班级，成绩
+
+b)找出实体之间的关系（relational）
+老师-》课程
+
+学生-》课程
+
+学生-》班级
+
+关系的产物：成绩
+1:1
+1:n
+n:n
+
+画出ER（entity-relational）图
+
+1：画出实体，建立属性
+2：建立关系
+3：标出属性
+4：标出主码
+5：创建实体表
+create table student(
+	sn bigint primary key,
+	name varchar(20) not null,
+	classid int,
+	foreign key(classid)references class(clao)
+	);
+insert into student values(201901,'李四',01);
+insert into student values(201902,'王二',02);
+insert into student values(201903,'麻子',01);
+
+create table course(
+	clo int primary key,
+	cname varchar(10) unique,
+	credit smallint not null default 3//设置一个确认值
+	);
+insert into course values (1,'复变函数',3);
+insert into course values (2,'高等数学',4);
+insert into course values (3,'模拟电路',4);
+insert into course values (4,'线性代数',5);
+
+create table teacher(
+	tlo int primary key,
+	tname varchar(20) not null
+	);
+insert into teacher values (1001,'高波');
+insert into teacher values (1002,'马建');
+insert into teacher values (1003,'张三');
+
+create table class(
+	clao int primary key,
+	name varchar(20) not null
+	);
+insert into class values (01,'computer');
+insert into class values (02,'computer');
+
+6：创建关系表
+create table take(//选课的一张表
+	sn int,
+	clo int,
+	score double(5,2)，
+	primary key(sn,clo)
+	);
+insert into take values(201901,1,100);
+insert into take values(201902,4,98);
+insert into take values(201903,2,99);
+
+create table teach(
+	clo int,
+	tlo int,
+	article varchar(20),//产生一个课件
+	primary key(cid,tid)
+	);
+insert into teach values(1,1002,'复变函数的课件');
+insert into teach values(2,1001,'高等数学的课件');
+insert into teach values(3,1003,'模拟电路的课件');
+insert into teach values(4,1001,'线性代数的课件');
+
+7：生成了一个笛卡尔积：（内连接查询）
+select * from class,student;
+
+	
+	
+	
+	
+	
+	
+
+
+1.2：建立关系模型
+
+（4）设计一个博客系统
+要求：
+a)要求由用户管理
+b)用户登录后能发表博客
+c)某个用户能给另外一个博客点赞
+
+实体：用户，博客
+关系：点赞，发表，登录
+
+
