@@ -1,12 +1,4 @@
 /**
- * Created with IntelliJ IDEA.
- * Description:内部类
- * User: GAOBO
- * Date: 2019-12-01
- * Time: 16:25
- */
-
-/**
  * 内部类：
  * 实例内部类
  * 静态内部类
