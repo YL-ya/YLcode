@@ -25,7 +25,6 @@ public class TestDemo5 {
         }
         return newHead.next;
     }
-
     public static void main(String[] args) {
         MyLinkedList myLinkedList = new MyLinkedList();
         myLinkedList.insertTail(1);
@@ -39,10 +38,8 @@ public class TestDemo5 {
         myLinkedList2.insertTail(3);
         myLinkedList2.insertTail(4);
         myLinkedList2.display();
-
         MyLinkedList.Node ret =
                 mergeList(myLinkedList.head,myLinkedList2.head);
         myLinkedList.display2(ret);
-
     }
 }
