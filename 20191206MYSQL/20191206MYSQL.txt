@@ -1,0 +1,135 @@
+##数据库的分类：
+1：关系型
+MySQL SqlServer oracle
+也就是有表组成，也叫关系。包包含列，字段，属性
+2.非关系型
+NOSQL
+##SQL结构化查询语言
+##DDL数据定义语言
+##DML数据操作语言
+
+##数据库特点：
+1：方便管理
+2：方便查询
+3：方便操作
+
+
+##创建数据库：
+1：先进行链接数据库：
+mysql -u root -p
+2：显示当前数据库：(观察一下有什么数据库)
+show databases；
+3：进行创建数据库
+create database [if not exits##该方块内的是可选择的] db_name;
+{如果在创建一个数据库的话用if not exit}
+4：(使用)哪个数据库：
+use + 数据库名；
+5：删除数据库，清理内存
+drop database [if exit] db_name;
+6：选择一个数据库：
+select database();
+
+##MySQL中常用数据类型：
+1：数值类型
+2：字符串类型
+3：日期类型
+
+##数据库中表的操作
+1：创建表：table
+语法：数据类型在后面，数据名在前，用逗号隔开，并且用()包起来
+create table student(
+    id int,
+    name varchar(20)comment'姓名',//comment只是用来注释；
+    age int,
+    birthday timestamp
+    );
+2：显示表(查询表结构)：
+desc+表名；(全名：describe table_name;)
+3：查看当前数据库下面有哪些表：
+show tables;
+4：删除表：(磁盘中生成的两个文件也回会被删除)
+drop table if exits student;
+
+##表中的增删改查(CURD)
+先要创建一个表，然后在进行数据操作：
+创建表：
+create table student(
+    -> id int,
+    -> sequence_name int comment'学号',
+    -> name varchar (20),
+    -> qq_mail varchar(100)
+    -> );
+##操作：（CRUD）:增删改查
+1：插入：insert
+1.1:全列插入：
+C：insert into student values();
+例如：insret into student values(1,41709040229,'zahngsan','zhangsan@qq.com');
+在MySQL语言中的字符串是单引号''，在这里的插入式全列插入，也就是有几列插入几条记录。
+1.2：指定列(字段)插入：
+insert into student(id,sequence_name)values(3,20170003);
+2：查询记录：select
+2.1：全列查询：
+D：select * from student；
+即查询表中所有的记录
+2.2：指定列查询：
+select id,name from student;
+2.3：当表中的样子不达到自己所要的样子
+select id+2000,sequence_name,name from student;
+3：别名：as
+4：去重：(distinct)select distinct math from score;
+5：排序：order by：
+(ascent)ASC(升序(默认))；
+(descend)DESC(降序);
+select name from student order by math(ASC/DESC)
+6：条件查询：where(<=;<;=and;or)
+select *from score where english between 90 and 100;
+7：模糊查找：like(不精确到一个数据)
+select * from student where name like 'l%';//"%"代表的多个字符；
+select * from student where name like 'l_';//"_"代表的一个字符；
+8：分页查找
+select * from student limit 1,2;//limit编号是从零开始的，
+也就是从上向下查两行；
+9：修改：update
+U：update score set english=100;
+10：删除：
+D：delete from table if exites table_name;
+
+
+##SQL的语法：(sql语言编程)
+1：select 1；没有表名的情况下
+2：select @i:=1;//i是一个变量，这时候的select相当于print也就是相当于打印；
+3：select database();表示查询在那个数据库中
+##(sql编程的语法)
+
+创建表进行练习：
+1：create table student(
+     name varchar(20),
+     sn int,
+     mysql double(5,2),
+     java int,
+    english double(5,2)
+     );
+2：create table student(
+     name varchar(20),
+     sn int,
+     first_time datetime, 范围：1000~9999）默认是null
+     graduate_time timestamp, (1970~2038)→UTC(英国本地时间)：GMT（北京时间）默认是系统当前时间
+     mysql double(5,2),
+     java int,
+    english double(5,2)
+     );
+//注意：当出现定义为两种都是timestamp的话需指定默认一个：
+例如：
+create table student(
+     first_time timestamp， 范围：1000~9999）默认是null
+     graduate_time timestamp default ‘2019-01-01 00:00:01’
+	); 
+
+3：insert into student values ('syl',20191228,'1000-01-01 00:00:01','1970-06-06 12:00:01',100,100,100);
+4：关键字
+5：show variables;
+6：show variables like 'char%';
+7： utf8_general_ci：系统设置是对字符的大小写是不敏感的： show variables like 'collation%';
+
+	
+
