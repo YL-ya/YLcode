@@ -1,12 +1,4 @@
-/**
- * Created with IntelliJ IDEA.
- * Description:
- * User: GAOBO
- * Date: 2019-12-01
- * Time: 17:10
- */
 public class TestDemo5 {
-
     public static MyLinkedList.Node mergeList(MyLinkedList.Node headA
             ,MyLinkedList.Node headB) {
         /*MyLinkedList myLinkedList = new MyLinkedList();
