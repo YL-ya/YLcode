@@ -1,5 +1,4 @@
 package string;
-
 import java.util.Scanner;
 public class TestDemo1 {
     //1·将输入的一个字符串以空格分割开来
