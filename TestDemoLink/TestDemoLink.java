@@ -1,13 +1,4 @@
 import java.util.LinkedList;
-
-/**
- * Created with IntelliJ IDEA.
- * Description:
- * User: GAOBO
- * Date: 2019-12-01
- * Time: 17:04
- */
-
 class MyLinkedList {
      static class Node {
         public int data;
