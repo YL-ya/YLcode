@@ -25,9 +25,9 @@ public class MiGong {
         //4·设置迷宫的挡板
         map[3][1]=1;
         map[3][2]=1;
-        //4.1：说明回溯的问题：将它堵死
+        /*//4.1：说明回溯的问题：将它堵死
         map[1][2]=1;
-        map[2][2]=1;
+        map[2][2]=1;*/
         //5·输出地图：
         System.out.println("输出地图的样子：");
         for (int i = 0; i <8 ; i++) {
@@ -36,10 +36,19 @@ public class MiGong {
             }
             System.out.println(" ");
         }
-        //6·使用递归进行找路
+       /* //6·使用递归进行找路
         setWay(map,1,1);
         //输出新的地图，小球走过的，并标识过的地图：
         System.out.println("小球走过的地图：");
+        for (int i = 0; i <8 ; i++) {
+            for (int j = 0; j <7 ; j++) {
+                System.out.print(map[i][j]+" ");
+            }
+            System.out.println();
+        }*/
+        //7:改变策略的结果：
+        setWay2(map,1,1);
+        System.out.println("输出新的小球走过的地图：");
         for (int i = 0; i <8 ; i++) {
             for (int j = 0; j <7 ; j++) {
                 System.out.print(map[i][j]+" ");
@@ -79,4 +88,30 @@ public class MiGong {
             }
         }
     }
+    //修改走路的策略：上，右，下，左
+    public static boolean setWay2(int[][]map,int i,int j){
+        if(map[6][5]==2){//说明通路已经找到
+            return true;
+        }else{
+            if(map[i][j]==0){//如果这个点没有被走过，先走在判断
+                map[i][j]=2;//也就是加点这个点可以走通
+                if(setWay2(map,i-1,j)){//向上走，如果那你如果走通，就返回一个true
+                    return true;
+                }else if(setWay2(map,i,j+1)){//向右走
+                    return true;
+                }else if(setWay2(map,i+1,j)){//向下走
+                    return true;
+                }else if(setWay2(map,i,j-1)){//向左走
+                    return true;
+                }else {
+                    //说明该点走不通，将该点置为3
+                    map[i][j]=3;
+                    return false;
+                }
+            }else {//如果map[i][j]!=0;map[i][j]可能是1或者2,3
+                return false;
+            }
+        }
+    }
+
 }
