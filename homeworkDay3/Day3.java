@@ -123,4 +123,30 @@ public class Day3 {
         return true;
     }
 }
+//方法2：
+/*
+class Solution {
+    public boolean isPalindrome(int x) {
+        if(x<0){
+            return false;
+        }
+        String a=x+"";
+        int b=a.length();
+        char[]c=new char[b];
+        for(int i=0;i<b;i++){
+            c[i]=a.charAt(i);
+        }
+        int left=0;
+        int right=b-1;
+        while(left<right){
+            if(c[left]==c[right]){
+                left++;
+                right--;
+            }else{
+                return false;
+            }
+        }
+        return true;
+    }
+}*/
 
