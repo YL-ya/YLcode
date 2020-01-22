@@ -1,7 +1,5 @@
 package homework;
-
 import java.util.Arrays;
-
 public class Day4 {
     /*
      * 题目1：给定一个仅包含大小写字母和空格 ' ' 的字符串 s，返回其最后一个单词的长度。*/
@@ -62,7 +60,6 @@ public class Day4 {
            merge(nums1,nums1.length,nums2,nums2.length);
        }
 
-
        public static void merge(int[] nums1, int  m, int[] nums2, int n) {
            //1:找出两数组中非连续零的个数
            int c=peek(nums1);
@@ -104,6 +101,7 @@ public class Day4 {
            }
        }
    }*/
+
    /* public static void main(String[] args) {
         int[] nums1 = {1, 2, 3, 0, 0, 0};
         int[] nums2 = {2, 5, 6};
@@ -148,7 +146,7 @@ public class Day4 {
         merge(nums1,3,nums2,3);
     }
     public static void merge(int[] nums1, int m, int[] nums2, int n) {
-        //1：直接将数组2放进数组1中
+        //1：直接将数组2放进数组1中，因为题目中已经直到那个有效数字的长度
         for (int i = m; i < nums1.length; i++) {
             nums1[i] = nums2[n-1];
             n--;
