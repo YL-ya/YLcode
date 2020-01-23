@@ -1,5 +1,4 @@
 package homework;
-
 public class Day3 {
     /*
      * 题目1：给定一个赎金信 (ransom) 字符串和一个杂志(magazine)字符串，
@@ -12,7 +11,6 @@ public class Day3 {
         boolean a = canConstruct(ransomNote, magazine);
         System.out.println(a);
     }
-
     public static boolean canConstruct(String ransomNote, String magazine) {
         //1:首先magazine的长度必须大于ransomNote的长度，因为是包含
         char[] a = magazine.toCharArray();
@@ -30,7 +28,6 @@ public class Day3 {
         }
         return true;
     }
-
     public static int jude(char[] a, char c) {
         for (int i = 0; i < a.length; i++) {
             //依次进行匹配
@@ -42,6 +39,7 @@ public class Day3 {
         return -1;
     }*/
 
+
     /*博客上写的：*/
     public static void main1(String[] args) {
         String ransomNote = "aab";
@@ -49,7 +47,6 @@ public class Day3 {
         boolean a = canConstruct(ransomNote, magazine);
         System.out.println(a);
     }
-
     public static boolean canConstruct(String ransomNote, String magazine) {
         char[] chars = magazine.toCharArray();
         //首先 ransomNote的长度肯定要小于 magazine的长度。
@@ -80,6 +77,7 @@ public class Day3 {
         }
         return -1;
     }
+
 
     /*
      * 题目2：判断一个整数是否是回文数。
@@ -123,6 +121,7 @@ public class Day3 {
         return true;
     }
 }
+
 //方法2：
 /*
 class Solution {
