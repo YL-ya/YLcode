@@ -10,9 +10,11 @@ public class Day6 {
         System.out.println(Arrays.toString(sortedSquares(a)));
     }
     public static int[] sortedSquares(int[] A) {
+        //1：进行数组的遍历
         for(int i=0;i<A.length;i++){
             A[i]=A[i]*A[i];
         }
+       //2：将数组进行排序
         Arrays.sort(A);
         return A;
     }
