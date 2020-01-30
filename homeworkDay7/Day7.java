@@ -1,7 +1,5 @@
 package homework;
-
 import java.util.Arrays;
-
 public class Day7 {
     /*
     * 题目1：给定一个非负整数数组 A，返回一个数组，在该数组中， A 的所有偶数元素之后跟着所有奇数元素。*/
@@ -28,12 +26,7 @@ public class Day7 {
     /*
     * 题目2：给定一个整数类型的数组 nums，请编写一个能够返回数组“中心索引”的方法。*/
     public static void main(String[] args) {
-        /*int[]a={-1,-1,-1,-1,-1,-1};*/
-        /*int[]a={-1,-1,-1,0,1,1};*/
-        /*int[]a={1,7,3,6,5,6};*/
-        /*int[]a={-1,-1,-1,-1,-1,0};*/
         int[]a={-1,-1,0,1,1,0};
-
         System.out.println(pivotIndex(a));
     }
     public static int pivotIndex(int[] nums) {
