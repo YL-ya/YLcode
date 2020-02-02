@@ -1,7 +1,5 @@
 package homework;
-
 import java.util.Arrays;
-
 public class Day9 {
     /*
      * 题目1：给定一个整数数组 nums 和一个目标值 target，
@@ -15,6 +13,7 @@ public class Day9 {
     public static int[] twoSum(int[] nums, int target) {
         int[] a = new int[2];
         int count = 0;
+        //跳出双层循环可以用标记
         labe:
         for (int i = 0; i < nums.length; i++) {
             for (int j = i + 1; j < nums.length; j++) {
@@ -32,7 +31,7 @@ public class Day9 {
     /*
      * 题目2：给定两个二进制字符串，返回他们的和（用二进制表示）。
      * 输入为非空字符串且只包含数字 1 和 0。*/
-    //自己写的：
+    //自己写的：有局限性
     public static void main(String[] args) {
         String a = "1110110101";
         String b = "1110111011";
