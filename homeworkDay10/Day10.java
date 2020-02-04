@@ -13,11 +13,13 @@ public class Day10 {
         int[]a=new int[2];
        //1：写一个方法判断数组中是否含有target这个值
         boolean j=judge(nums,target);
+       //2：判断是否含有，如果不含有直接将子案件的数组全部置为-1；然后返回。
         if(j==false){
             a[0]=-1;
             a[1]=-1;
             return a;
         }else {
+       //3：如果含有，则定义两个指针即可
             int left = 0;
             int right = nums.length - 1;
             while (left <= right) {
@@ -38,6 +40,7 @@ public class Day10 {
         }
         return a;
     }
+    
     public static boolean judge(int[]b,int target){
         for(int i=0;i<b.length;i++){
             if(b[i]==target){
