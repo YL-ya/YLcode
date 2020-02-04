@@ -1,7 +1,5 @@
 package homework;
-
 import java.util.Arrays;
-
 public class Day10 {
     /*
     * 题目1：给定一个按照升序排列的整数数组 nums，和一个目标值 target。
@@ -11,7 +9,9 @@ public class Day10 {
         System.out.println(Arrays.toString(searchRange(nums,2)));
     }
     public static int[] searchRange(int[] nums, int target) {
+        //思路：定义两个指针，一个从前面开始，一个从数组的后面开始即可
         int[]a=new int[2];
+       //1：写一个方法判断数组中是否含有target这个值
         boolean j=judge(nums,target);
         if(j==false){
             a[0]=-1;
