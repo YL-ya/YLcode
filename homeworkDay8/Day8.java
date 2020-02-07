@@ -1,16 +1,16 @@
 package homework;
-
 import java.util.Arrays;
-
 public class Day8 {
     /*
-    * 题目1：给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。*/
+    * 题目1：给定一个由整数组成的非空数组所表示的非负整数，
+     *在该数的基础上加一。*/
     public static void main1(String[] args) {
         int[] a = {9};
         System.out.println(Arrays.toString(plusOne(a)));
     }
 
     public static int[] plusOne(int[] digits) {
+        //1：创建新的变量：产生进位的进行加1即可
         int i=digits.length-1;
         digits[i]++;
         if(digits[i]>9){//此处产生进位
