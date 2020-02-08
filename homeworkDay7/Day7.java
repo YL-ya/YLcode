@@ -1,7 +1,5 @@
 package homework;
-
 import java.util.Arrays;
-
 public class Day7 {
     /*
     * 题目1：给定一个非负整数数组 A，返回一个数组，在该数组中， A 的所有偶数元素之后跟着所有奇数元素。*/
@@ -10,6 +8,7 @@ public class Day7 {
         System.out.println(Arrays.toString(sortArrayByParity(A)));
     }
     public static int[] sortArrayByParity(int[] A) {
+        //1：思想：定义两个变量，偶数从数组的前面开始放，奇数从数组的后面开始放即可
         int[]a=new int[A.length];
         int count=0;
         int cur=A.length-1;
@@ -62,9 +61,6 @@ public class Day7 {
         for (int i = a+1; i <num.length ; i++) {
             cur+=num[i];
         }
-        /*if(0==cur){
-            return 0;
-        }*/
         if(sum==cur){
             return 1;
         }
