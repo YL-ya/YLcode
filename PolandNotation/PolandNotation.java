@@ -59,9 +59,11 @@ public class PolandNotation {
                 int num2=Integer.parseInt(stack.pop());//将字符串格式化成相应的类型
                 int num1=Integer.parseInt(stack.pop());
                 int res=0;
+                //因为是字符类型的，所以匹配时候要用equals
                 if(item.equals("+")){
                     res=num1+num2;
                 }else if(item.equals("－")){
+                //这里注意是谁在前谁在后
                     res=num1-num2;
                 }else if(item.equals("*")){
                     res=num1*num2;
