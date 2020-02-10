@@ -54,9 +54,7 @@ class CircleArray{
         * 1·要采用一个第三个变量将队列中的front的值保存下来
         * 2·front需要后移，为了不越界就得考虑取模运算
         * 3·将第三个变量的值返回即可*/
-        //return arr[front];
         int value=arr[front];
-        //front++;
         front=(front+1)%maxSize;
         return value;
     }
