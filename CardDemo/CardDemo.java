@@ -4,6 +4,7 @@ import java.util.ArrayList;
 /*
 public class Test20191224 {
     public static void main(String[] args) {
+        //尖括号中可以指定任意类型，但是必须是包装类，也就是说int必须写成integer类似等等的包装类型
         ArrayList<String> L1 = new ArrayList<>();
         List<String> L2 = new ArrayList<>();
 
@@ -75,6 +76,7 @@ import java.util.Random;
 
 // 牌的结构
 class Card{
+//定义好牌的属性，例如花色和范围等等的
     Card(String suit, int rank){
         this.suit = suit;
         this.rank = rank;
