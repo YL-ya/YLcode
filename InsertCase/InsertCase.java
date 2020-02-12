@@ -1,13 +1,10 @@
 package com.bitedu.mysql;
-
 import java.sql.*;
-
 public class InsertCase {
-
+    //创建表
     public static void createTable(){
         Connection connection = null;
         Statement stmt = null;
-
         try {
             //1. 加载驱动
             Class.forName("com.mysql.jdbc.Driver");
@@ -43,11 +40,11 @@ public class InsertCase {
         }
 
     }
-
+    
+    //插入表
     public static void insertIntoTable(){
         Connection connection = null;
         Statement stmt = null;
-
         try {
             //1. 加载驱动
             Class.forName("com.mysql.jdbc.Driver");
@@ -83,6 +80,7 @@ public class InsertCase {
         }
     }
 
+    //查询表
     public static void selectTable(){
         Connection connection = null;
         Statement stmt = null;
