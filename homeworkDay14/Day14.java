@@ -45,12 +45,13 @@ public class Day14 {
      * 题目2：公交路线：
      * 我们有一系列公交路线。每一条路线 routes[i] 上都有一辆公交车在上面循环行驶。
      * 例如，有一条路线 routes[0] = [1, 5, 7]，表示第一辆 (下标为0) 公交车会一直按照 1->5->7->1->5->7->1->... 的车站路线行驶*/
-    public static void main(String[] args) {
+    public static void main1(String[] args) {
         int[][] a = {{1, 2, 7}, {3, 6, 7}};
         System.out.println(numBusesToDestination(a, 1, 6));
     }
+
     /*
-    * 立扣上面给的题解：*/
+     * 立扣上面给的题解：*/
     public static int numBusesToDestination(int[][] routes, int S, int T) {
         // 特殊情况以及数据初始化
         if (S == T) {
@@ -167,7 +168,7 @@ public class Day14 {
         }
         return false;
     }
-}
+
 
     /*自己写的有缺陷：
     public static int numBusesToDestination(int[][] routes, int S, int T) {
@@ -206,3 +207,55 @@ public class Day14 {
         }
         return -1;
     }*/
+
+
+    /*
+    * 题目3：通配符匹配：
+    * '?' 可以匹配任何单个字符。
+    * '*' 可以匹配任意字符串（包括空字符串）。*/
+    public static void main(String[] args) {
+        String a="aa";
+        String b="a";
+        System.out.println(isMatch(a,b));
+    }
+    /*
+    * 状态 dp[i][j] : 表示 s 的前 i 个字符和 p 的前 j 个字符是否匹配 (true 的话表示匹配)
+    * 状态转移方程：
+     * 1. 当 s[i] == p[j]，或者 p[j] == ? 那么 dp[i][j] = dp[i - 1][j - 1];
+       2. 当 p[j] == * 那么 dp[i][j] = dp[i][j - 1] || dp[i - 1][j]
+     * 其中：
+         dp[i][j - 1] 表示 * 代表的是空字符，例如 ab, ab*
+         dp[i - 1][j] 表示 * 代表的是非空字符，例如 abcd, ab*
+     * 初始化：
+        * 1. dp[0][0] 表示什么都没有，其值为 true
+          2. 第一行 dp[0][j]，换句话说，s 为空，与 p 匹配，所以只要 p 开始为 * 才为 true
+          3. 第一列 dp[i][0]，当然全部为 false
+    */
+    public static boolean isMatch(String s, String p) {
+        int m = s.length();
+        int n = p.length();
+
+        // 状态 dp[i][j] : 表示 s 的前 i 个字符和 p 的前 j 个字符是否匹配
+        boolean[][] dp = new boolean[m + 1][n + 1];
+
+        // 初始化
+        dp[0][0] = true;
+        for (int i = 1; i <= n; i++) {
+            dp[0][i] = dp[0][i - 1] && p.charAt(i - 1) == '*';
+        }
+
+        // 状态转移
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '?') {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else if (p.charAt(j - 1) == '*') {
+                    dp[i][j] = dp[i][j - 1] || dp[i - 1][j];
+                }
+            }
+        }
+
+        // 返回结果
+        return dp[m][n];
+    }
+}
