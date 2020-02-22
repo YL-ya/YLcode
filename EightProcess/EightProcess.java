@@ -15,15 +15,56 @@ public class EightProcess {
     int max=8;
     //定义一个数组arr保存皇后防止位置的保存结果，比如arr[8]={0,4,7,5,2,6,1,3}
     int[]arr=new int[max];//因为棋盘是共享的所以写在外面
+    static int count=0;
 
     public static void main(String[] args) {
+        //测试：
+        EightProcess queue8=new EightProcess();
+        queue8.check(0);
+        System.out.println("一共有"+count+"解法");
+    }
+    //编写一个方法放置第n个皇后
+    //注意：check每次递归的时候，进入该方法都会有for循环，执行完了才会退出，因此会有回溯
+    private void check(int n){
+        if(n==max){
+            //1：也就是说在n=8的时候，其实八个皇后已经放好了
+            print();
+            return;
+        }
+        //2：否则就是前面的8个皇后开始放置，判断是否冲突
+        for (int i = 0; i <max ; i++) {
+            //2.1：先把当前的皇后放在改行的第一列，判断是否冲突即可
+            arr[n]=i;
+            //2.2：并且判断是否发生冲突
+            if(judge(n)){//在这里默认结果是不冲突
+                //2.3：接着放n+1个皇后，即开始递归
+                check(n+1);//对于8个皇后，在同一层都会有8次循环
+            }
+            //一旦发生冲突，就继续执行arr[n]=i;也就是放入第二列，第三列等等
+        }
+
 
     }
+    //当我们防止第n个的皇后的时候就去检测是否与前面已经摆放的皇后发生冲突
+    private boolean judge(int n){
+        /*说明：
+         * 1：arr[i]==arr[n]表示判断第n个皇后是否与前面的n-1个皇后在同一列：因为下标代表的数组里面的值
+         * 2：表示在同一列,同一斜线,Math.abs(int a)是一个算法，是绝对值
+         * 3：为什么没有说行数的关系，因为n就是代表的行数，是递增的，放了第一个，就会立马往第二行开始放*/
+        //n表示放置第n个皇后的时候
+        for (int i = 0; i <n ; i++) {
+            if(arr[i]==arr[n]||Math.abs(n-i)==Math.abs(arr[n]-arr[i])) {
+                return false;
+            }
+        }
+        return true;//表示当前的皇后与前面的皇后的位置是不会发生冲突的
+    }
 
-    //写一个方法，可以将皇后最后摆放的位置打印出来
+    //写一个方法，可以将皇后最后摆放的位置打印出来：也就是将那个数组打印出来即可
     private void print(){
+        count++;
         for (int i = 0; i <arr.length ; i++) {
-            System.out.println(arr[i]+" ");
+            System.out.print(arr[i]+" ");
         }
         System.out.println();
     }
