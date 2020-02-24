@@ -16,14 +16,24 @@ public class BubbleSort {
 
         //第一趟排序是将最大的数排在数组的最后：时间复杂度：O(n^2)
         int temp=0;
+        boolean flag=false;
         for (int j= 0; j <arr.length ; j++) {
+
             for (int i = 0; i < arr.length -1-j; i++) {//五个变量要进行四次交换：j是0~3
                 //如果前面的数大于后面的数，则进行交换
                 if (arr[i] > arr[i + 1]) {
+                    flag=true;
                     temp = arr[i];
                     arr[i] = arr[i + 1];
                     arr[i + 1] = temp;
                 }
+            }
+            //优化：就是将一趟排序完成后判断是会否发生过交换即可
+            //一趟排序完了之后发该趟排序中没有发生一次交换，则认为已经排序好了
+            if(flag==false){//if(!flag)
+                break;//提前结束冒泡排序，因为已经有序
+            }else {
+                flag=false;//在这里重置flag置为了判断下一趟的排序
             }
         }
         System.out.println("趟排序后的数组："+ Arrays.toString(arr));
