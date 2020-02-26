@@ -13,11 +13,13 @@ import java.util.Date;
 
 public class InsertSort {
     public static void main(String[] args) {
-        /*int[]arr={101,34,119,1};
+        int[]arr={101,34,119,1};
         System.out.println("排序前的数组："+Arrays.toString(arr));
         insertSort(arr);
-        System.out.println("排序后的数组："+Arrays.toString(arr));*/
-        //测试事后的时间复杂度：随机产生80000个数
+        System.out.println("排序后的数组："+Arrays.toString(arr));
+
+
+        /*//测试事后的时间复杂度：随机产生80000个数
         int[] arr = new int[80000];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (int) (Math.random() * 80000);//生成[0,80000）的随机数
@@ -35,7 +37,7 @@ public class InsertSort {
 
         Date date2=new Date();
         String data2=simpleDateFormat.format(date2);
-        System.out.println("排序后的时间是："+data2);
+        System.out.println("排序后的时间是："+data2);*/
     }
 
     //插入排序：
@@ -48,8 +50,9 @@ public class InsertSort {
                 a[insertIndex+1]=a[insertIndex];
                 insertIndex--;
             }
-
-            a[insertIndex+1]=insertVal;
+            if(insertIndex+1!=i){//这里说明排除此时要插入的位置就是当前所在的位置
+                a[insertIndex+1]=insertVal;
+            }
         }
 
         /*//第一趟排序：{101,34,119,1}→{34,101,119,1}
