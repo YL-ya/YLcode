@@ -1,6 +1,8 @@
 package com.arithmetic.sort;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 //快速排序：是对冒泡排序的一种改进
 /*
@@ -8,9 +10,30 @@ import java.util.Arrays;
 * 继续在那两部分里面进行排序即可*/
 public class QuickSort {
     public static void main(String[] args) {
-        int[]arr={-9,78,0,23,-567,70};
+
+       /* int[]arr={-9,78,0,23,-567,70};
         quickSort(arr,0,arr.length-1);
-        System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(arr));*/
+
+        //测试快速排序的事后时间复杂度：随机产生80000个数
+        int[] arr = new int[80000];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int) (Math.random() * 80000);//生成[0,80000）的随机数
+        }
+
+        //将运行的时间进行前后的比较并输出
+        Date date1 = new Date();
+        //将时间进行格式化：
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+        String data1 = simpleDateFormat.format(date1);
+        System.out.println("排序前的时间是：" + data1);
+
+        //进行插入排序：
+        quickSort(arr,0,arr.length-1);
+
+        Date date2=new Date();
+        String data2=simpleDateFormat.format(date2);
+        System.out.println("排序后的时间是："+data2);
     }
 
     //快速排序;-9,78,0,23,-567,70
