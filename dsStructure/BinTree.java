@@ -47,14 +47,42 @@ public class BinTree {
         return getNodeCount(root.left)+getNodeCount(root.right)+1;
     }
 
-    //获取叶子节点的个数：
+    //获取叶子节点的个数：没有孩子的节点就是叶子节点
+    /*1：空树的情况下是没有叶子节点的
+    *:2：非空树：左右子树的叶子节点相加即可*/
     public int getLeafCount(){
         return getLeafCount(root);
     }
     private int getLeafCount(BTNode root){
-        
+        if(root==null) {
+            return 0;//树为空树的时候
+        }
+        if(root.left==null&&root.right==null){
+            return 1;
+        }
+        return getLeafCount(root.left)+getLeafCount(root.right);
 
     }
+
+    //获取K层节点的个数：
+    /*拆分成子问题：变成从子树中求解
+    * 就是说如果是根节点就返回1；然后就进行子树(k-1层即可)的遍历算法*/
+    public int getLevelNodeCount(int k){
+        return getLevelNodeCount(root,k);
+    }
+    private int getLevelNodeCount(BTNode root,int k){
+        if(root==null||k<1){
+            return 0;
+        }
+
+        if(k==1){//第一层节点的个数:肯定是一个根节点
+            return 1;
+        }
+
+        //到root的子树的k-1层节点的个数
+        return getLevelNodeCount(root.left,k-1)+getLevelNodeCount(root.right,k-1);
+    }
+
 
     //遍历方式：前序，中序，后序
     //前序遍历：根节点，根节点的左子树，根节点的右子树，将节点中的值进行打印
@@ -104,5 +132,7 @@ public class BinTree {
         binTree.inOrder();
         binTree.preOrder();
         System.out.println("二叉树的节点："+binTree.getNodeCount());
+        System.out.println("二叉树的叶子节点个数："+binTree.getLeafCount());
+        System.out.println(binTree.getLevelNodeCount(3));
     }
 }
