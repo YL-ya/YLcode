@@ -32,10 +32,27 @@ public class BinTree {
     }
 
     //获取节点的个数：
+    /*两种方法：
+    1：采用遍历的三种方法(LOW)
+    2：将大问题分解成小问题：
+    空树的情况下：0
+    非空：左子树的节点+右子树的节点个数+1(根节点)*/
     public int getNodeCount(){
         return getNodeCount(root);
     }
     private int getNodeCount(BTNode root){
+        if(root==null){
+            return 0;
+        }
+        return getNodeCount(root.left)+getNodeCount(root.right)+1;
+    }
+
+    //获取叶子节点的个数：
+    public int getLeafCount(){
+        return getLeafCount(root);
+    }
+    private int getLeafCount(BTNode root){
+        
 
     }
 
@@ -86,5 +103,6 @@ public class BinTree {
         binTree.preOrder();//这里调用者精良不传参，因为还要去了解那些参数的概念
         binTree.inOrder();
         binTree.preOrder();
+        System.out.println("二叉树的节点："+binTree.getNodeCount());
     }
 }
