@@ -378,6 +378,7 @@ public class BinTree {
         return true;
     }
 
+    //十四：层序遍历，将每层节点保存在一个动态的二维数组中
     public List<List<Integer>> levelOrder1() {
         return levelOrder1(root);
     }
@@ -411,6 +412,50 @@ public class BinTree {
             ret.add(level);
         }
         return ret;
+    }
+
+    //十五：还原二叉树：前序+中序
+    public BTNode buildTree(int[] preorder, int[] inorder) {
+        return reBuildTree(preorder, inorder, 0, inorder.length);
+    }
+    //preorder:前序的遍历结果
+    //inorder:中序的遍历结果
+    //[left,right):标记树中节点inorder中的范围
+    private BTNode reBuildTree(int[]preorder,int[]inorder,int left,int right){
+        //将index给成一个全局变量，就是回溯的时候变成0了
+        int index=0;
+
+        if(index>=preorder.length&&left>=right){
+            //这个区间不存在，说明子树没有
+            return null;
+        }
+
+        //找到根节点：在前序遍历的结果中
+        BTNode root=new BTNode(preorder[index]);//以根节点为根
+
+        //在中序遍历结果中找根的位置
+        int inrootIdx=left;//注意在这里一定不能给0
+        while(inrootIdx<right){
+            if(inorder[inrootIdx]==preorder[index]){
+                //如果找到了，解直接跳出
+                break;
+            }
+            inrootIdx++;
+        }
+
+        //退出循环，就将根节点在中序遍历中找到了根节点
+        //创建根节点：
+        //TreeNode root=new TreeNode(preorder[index]);//以根节点为根
+        ++index;
+        //递归的创建根节点的左子树
+        //左子树的区间：[left,inrootIdx]
+        root.left=reBuildTree(preorder,inorder,left,inrootIdx);
+
+        //递归的创建根节点的右子树
+        root.right=reBuildTree(preorder,inorder,inrootIdx+1,right);
+
+        //最后重建好了的树，直接返回一个根即可
+        return root;
     }
 
     public static void main(String[] args) {
