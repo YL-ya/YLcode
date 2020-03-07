@@ -1,8 +1,8 @@
 package com.dataStrcture;
 
+import java.util.*;
 import java.util.Queue;
-
-import java.util.LinkedList;
+import java.util.Stack;
 
 //查询伪递归的概念
 // 二叉树采用孩子表示法进行表示：采用的是链式存储
@@ -190,7 +190,7 @@ public class BinTree {
         return isBalanced(root.left)&&isBalanced(root.right);
     }
 
-    //层序遍历(也称作广度优先遍历)：采用队列的方式
+    //九：层序遍历(也称作广度优先遍历)：采用队列的方式
     /*思路：
     * 1：空树：直接进行返回
     * 2：让根先入队列
@@ -199,7 +199,7 @@ public class BinTree {
     * 2.2：遍历该节点
     * 2.3：如果当前有左子树，将左子树入队列
     * 2.4：如果当前有右子树，将右子树入队列*/
-    public void levelOrder(){
+    private void levelOrder(){
         if(root==null){
             return;
         }
@@ -208,7 +208,7 @@ public class BinTree {
         while(!q.isEmpty()){
             //先将对头节点取出来：
             BTNode cur=q.poll();
-            System.out.print(cur.val);
+            System.out.print(cur.val+" ");
 
             //如果cur有左子树，将左子树，入队列
             if(cur.left!=null){
@@ -223,8 +223,68 @@ public class BinTree {
         System.out.println();
     }
 
+    //十：前序非递归遍历方式1：利用栈
+    /*思路：先遍历左子树，在遍历右子树
+    * 1：将根节点入栈
+    * 循环以下操作：
+    * 2：取栈顶元素cur，并打印遍历
+    * 3：删除栈顶元素
+    * 4：如果cur的右子树不为空，将其入栈(保存起来)
+    * 5：如果cur的左子树不为空，将其入栈(保存起来)
+    * 注意：在这里一定是先将右子树入栈，因为先进的后出*/
+    private void preOrder1(){
+        if(root==null){
+            return;
+        }
 
-    //遍历方式：前序，中序，后序
+        Stack<BTNode> q=new Stack<>();
+        q.push(root);
+        while (!q.empty()) {
+            BTNode topNode=q.peek();
+            System.out.print(topNode.val+" ");
+            q.pop();
+
+            //如果栈顶元素也就是根节点：topNode
+            //注意：一定是先是右子树：因为先进的后出
+            if (topNode.right != null) {
+                q.push(topNode.right);
+            }
+
+            //如果topNode的左子树存在，就将其入栈
+            if (topNode.left != null) {
+                q.push(topNode.left);
+            }
+        }
+        System.out.println();
+    }
+
+    //十一：前序遍历非递归方法2：一条路走到底
+    /*思路：
+    * 1：让cur一直走它的左孩子：cur=cur.left
+    * 2：在一直走的过程中将节点的右孩子进行保存即可(因为先保存的孩子要在后面进行打印，所以才用栈的结构)*/
+    public void preOrder2(){
+        if(root==null){
+            return;
+        }
+
+        Stack<BTNode> p=new Stack<>();
+        p.push(root);
+
+        while (!p.empty()) {
+            BTNode cur=p.peek();//外层循环是用来管理右子树的
+            p.pop();
+            while (cur != null) {//管理左子树
+                System.out.print(cur.val + " ");
+                if (cur.right != null) {
+                    p.push(cur.right);
+                }
+                cur = cur.left;
+            }
+        }
+        System.out.println();
+    }
+
+    //十二：遍历方式：前序，中序，后序
     //前序遍历：根节点，根节点的左子树，根节点的右子树，将节点中的值进行打印
     /*前序遍历相当于深度优先遍历：一条路走到通*/
     public void preOrder(){
@@ -267,12 +327,106 @@ public class BinTree {
             System.out.print(root.val+" ");
         }
     }
+
+    //十三：判断是否是完全二叉树：
+    /*思路：（设该树有k层）
+    * 1：（在k-1层里面）找到第一个孩子不全的节点（1：只有左孩子 2：只有右孩子 3：没有孩子）
+    * 2：如果某个节点只有右孩子没有左孩子→一定不是完全二叉树
+    * 总结：
+    * 1：找到第一个不饱和的节点，然后后序的节点一定是没有孩子的(否则不是完全二叉树)
+    * 实现方式：
+    * 1：层序遍历树，找到第一个不是饱和节点
+    * 2：从该节点之后的所有节点不能有孩子，如果有则一定不是完全二叉树*/
+    public boolean isCompleteBinTree(){
+        return isCompleteBinTree(root);
+    }
+    private boolean isCompleteBinTree(BTNode root){
+        //1：空树也是完全二叉树
+        if(root==null){
+            return true;
+        }
+
+        //2：树非空
+        Queue<BTNode> z=new LinkedList<>();
+        z.offer(root);
+        boolean isLeafOrLeft=false;
+        while (!z.isEmpty()) {
+            BTNode cur = z.poll();
+
+            if (isLeafOrLeft == true) {
+                //2：从第一个不饱和节点之后，所有的节点都不能有孩子
+                if (cur.left != null || cur.right != null) {
+                    return false;
+                }
+            } else {
+                //1：按照层序遍历找到第一个不饱和节点(叶子节点，只有一个孩子的节点)
+                //cur节点的左右孩子均存在
+                if (cur.left != null && cur.right != null) {
+                    z.offer(cur.left);
+                    z.offer(cur.right);
+                } else if (cur.left != null) {//cur只有左孩子，即是不饱和的节点，判断后序的节点是否有孩子节点
+                    z.offer(cur.left);
+                    isLeafOrLeft = true;//当该变量为true的时候，说明地已经找到了饱和节点的位置
+                } else if (cur.right != null) {//cur只有右孩子
+                    return false;//只有右孩子的情况下肯定不是完全二叉树
+                } else {//该节点是叶子节点
+                    isLeafOrLeft = true;
+                }
+
+            }
+        }
+        return true;
+    }
+
+    public List<List<Integer>> levelOrder1() {
+        return levelOrder1(root);
+    }
+    private List<List<Integer>> levelOrder1(BTNode root){
+        List<List<Integer>> ret=new ArrayList<>();
+        if(root==null){
+            return ret;
+        }
+
+        //先建立一个队列：
+        Queue<BTNode> q=new LinkedList<>();
+        q.offer(root);
+
+        while (!q.isEmpty()){
+            int size=q.size();
+            List<Integer> level=new ArrayList<>(size);
+            for (int i = 0; i <size ; i++) {
+                BTNode cur=q.poll();
+                level.add(cur.val);
+
+                //然后将左右子树放入队列：
+                if(cur.left!=null){
+                    q.offer(cur.left);
+                }
+                if(cur.right!=null){
+                    q.offer(cur.right);
+                }
+            }
+            //退出里层循环是已经将一层的节点里面的值放入了一个一位数组中，
+            // 只用将它加在自己创建的动态二维数组中即可
+            ret.add(level);
+        }
+        return ret;
+    }
+
     public static void main(String[] args) {
         BinTree binTree=new BinTree();
         binTree.preOrder();//这里调用者精良不传参，因为还要去了解那些参数的概念
         binTree.inOrder();
         binTree.preOrder();
+        if(binTree.isCompleteBinTree()){
+            System.out.println("It is a complete tree!!!");
+        }else {
+            System.out.println("It is not a complete tree!!!");
+        }
         binTree.levelOrder();
+        binTree.preOrder1();
+        binTree.preOrder2();
+        binTree.levelOrder1();
         System.out.println("二叉树的节点："+binTree.getNodeCount());
         System.out.println("二叉树的叶子节点个数："+binTree.getLeafCount());
         System.out.println(binTree.getLevelNodeCount(3));
