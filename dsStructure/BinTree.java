@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.Queue;
 import java.util.Stack;
 
+
 //查询伪递归的概念
 // 二叉树采用孩子表示法进行表示：采用的是链式存储
 //定义每个节点
@@ -199,7 +200,11 @@ public class BinTree {
     * 2.2：遍历该节点
     * 2.3：如果当前有左子树，将左子树入队列
     * 2.4：如果当前有右子树，将右子树入队列*/
-    private void levelOrder(){
+    public void levelOrder(){
+        System.out.print("层序遍历(非递归)：");
+        levelOrder(root);
+    }
+    private void levelOrder(BTNode root){
         if(root==null){
             return;
         }
@@ -232,7 +237,11 @@ public class BinTree {
     * 4：如果cur的右子树不为空，将其入栈(保存起来)
     * 5：如果cur的左子树不为空，将其入栈(保存起来)
     * 注意：在这里一定是先将右子树入栈，因为先进的后出*/
-    private void preOrder1(){
+    public void preOrder1(){
+        System.out.print("前序遍历(非递归)：");
+        preOrder1(root);
+    }
+    private void preOrder1(BTNode root){
         if(root==null){
             return;
         }
@@ -263,6 +272,10 @@ public class BinTree {
     * 1：让cur一直走它的左孩子：cur=cur.left
     * 2：在一直走的过程中将节点的右孩子进行保存即可(因为先保存的孩子要在后面进行打印，所以才用栈的结构)*/
     public void preOrder2(){
+        System.out.print("前序遍历(非递归)：");
+        preOrder2(root);
+    }
+    public void preOrder2(BTNode root){
         if(root==null){
             return;
         }
@@ -288,7 +301,7 @@ public class BinTree {
     //前序遍历：根节点，根节点的左子树，根节点的右子树，将节点中的值进行打印
     /*前序遍历相当于深度优先遍历：一条路走到通*/
     public void preOrder(){
-        System.out.print("前序遍历：");
+        System.out.print("前序遍历(递归)：");
         preOrder(root);
         System.out.println();
     }
@@ -302,7 +315,7 @@ public class BinTree {
 
     //中序遍历：根节点的左子树，根节点，根节点的右子树，将节点的值进行打印
     public void inOrder(){
-        System.out.print("中序遍历：");
+        System.out.print("中序遍历(递归)：");
         inOrder(root);
         System.out.println();
     }
@@ -316,7 +329,7 @@ public class BinTree {
 
     //后序遍历：根节点的左子树，根节点的右子树，根节点
     public void postOrder(){
-        System.out.print("后序遍历：");
+        System.out.print("后序遍历(递归)：");
         preOrder(root);//进行包装一层，让调用者看起来简单方便操作
         System.out.println();
     }
@@ -458,22 +471,68 @@ public class BinTree {
         return root;
     }
 
+    //十六：中序：非递归：注意：一般将递归转为非递归就是用：循环+栈(或者队列)
+    //后递归的先退出：像栈的特性
+    /*特点：
+    * 1：中序遍历的第一个节点一定是这颗树的最左侧的节点cur=cur.left(让cur一直往左边走)，并(通过栈)将保存走过的节点
+    * 2：当cur.left==null时，说明当前节点的左子树已经遍历完了，获取栈顶元素
+    * 3：*/
+    public void inOrderNor() {
+        System.out.print("中序遍历(非递归)：");
+        inOrderNor(root);
+        System.out.println();
+    }
+    private void inOrderNor(BTNode root){
+        if(root==null){
+            return;
+        }
+        BTNode cur=root;
+
+        Stack<BTNode> p=new Stack<>();
+        while(!p.empty()||cur!=null) {
+            //1：找以root为根的最左侧的节点，并保存走过的节点：
+            while (cur != null) {
+                p.push(cur);
+                cur = cur.left;
+            }
+
+            //退出循环cur=null
+            //cur为空，就说明该棵树已经遍历，该遍历上个节点的左右子树了
+            cur = p.peek();
+            System.out.print(cur.val + " ");
+            p.pop();
+
+            //cur为根的二叉树的左子树已经遍历，剩余右子树还没有遍历
+            cur = cur.right;
+        }
+    }
+
+
     public static void main(String[] args) {
         BinTree binTree=new BinTree();
-        binTree.preOrder();//这里调用者精良不传参，因为还要去了解那些参数的概念
+
+        binTree.preOrder();//这里调用者尽量不传参，因为还要去了解那些参数的概念
+        //binTree.preOrder();
+        binTree.preOrder1();
+        binTree.preOrder2();
+
         binTree.inOrder();
-        binTree.preOrder();
+        binTree.inOrderNor();
+
         if(binTree.isCompleteBinTree()){
             System.out.println("It is a complete tree!!!");
         }else {
             System.out.println("It is not a complete tree!!!");
         }
+
+
         binTree.levelOrder();
-        binTree.preOrder1();
-        binTree.preOrder2();
+
         binTree.levelOrder1();
+        //这个是将层次遍历结果保存在一个动态的二维数组中List<List<BtNode>=new LinkedList<BtNode>();
+
         System.out.println("二叉树的节点："+binTree.getNodeCount());
         System.out.println("二叉树的叶子节点个数："+binTree.getLeafCount());
-        System.out.println(binTree.getLevelNodeCount(3));
+        System.out.println("二叉树的深度为："+binTree.getLevelNodeCount(3));
     }
 }
