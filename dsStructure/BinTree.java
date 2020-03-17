@@ -643,7 +643,7 @@ public class BinTree {
     }
 
     //十九：求指定两个节点的最近的公共祖先：
-    /*思想：
+    /*思想1：从双亲表示法中的到的启示
     * 1：写一个找节点路径的方法，并将路径保存在栈中
     * 2：在两个栈中pop()值，当值相等的时候，就是他们的公共祖先：这也包含了一点链表求交点的问题：让长的先走*/
     //思路：
@@ -703,6 +703,64 @@ public class BinTree {
             }
         }
         return null;
+    }
+
+    /*思想2：从线索二叉树中得到的
+    * 1：判断是否在同一个子树中，在就返回根节点*/
+
+    //判断是否在同一个子树中，在就直接返回当前的根节点
+    public static boolean isNodeInTree(BTNode node,BTNode root){
+        if(root==null){
+            return false;
+        }
+        if(root==node) {
+            return true;
+        }
+        if(isNodeInTree(root.left,node)||isNodeInTree(root.right,node)){
+            return true;
+        }
+        return false;
+    }
+    public static BTNode lowestCommonAncestor1(BTNode root, BTNode p, BTNode q) {
+        if(root==null||p==null||q==null){
+            return null;
+        }
+        //如果有一个节点在跟的位置，最近的祖先一定是根节点root
+        if(root==p||root==q){
+            return root;
+        }
+
+        //检测p,q在root子树的那边？
+        boolean ispInLeft=false;
+        boolean ispInRight=false;
+        boolean isqInLeft=false;
+        boolean isqInRight=false;
+
+        if(isNodeInTree(root.left,p)){
+            ispInLeft=true;
+            ispInRight=false;
+        }else {
+            ispInLeft=false;
+            ispInRight=true;//不再左子树里面就在右子树里面
+        }
+
+        //检测q在子树中的情况
+        if(isNodeInTree(root.left,q)){
+            isqInLeft=true;
+            isqInRight=false;
+        }else {
+            isqInLeft=false;
+            isqInRight=true;
+        }
+
+        //p,q分别在root的左右子树中
+        if((ispInLeft&&isqInRight)||(ispInRight&&isqInLeft)){
+            return root;
+        }else if(ispInLeft&&isqInLeft){
+            return lowestCommonAncestor1(root.left,p,q);//在左子树中找
+        }else {
+            return lowestCommonAncestor1(root.right,p,q);//在右子树中找
+        }
     }
 
 
