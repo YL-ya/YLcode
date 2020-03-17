@@ -8,7 +8,7 @@ import java.util.Stack;
 //查询伪递归的概念
 // 二叉树采用孩子表示法进行表示：采用的是链式存储
 //定义每个节点
-class BTNode{
+class  BTNode{
     BTNode left;//指向该节点的左子树
     BTNode right;//指向该节点的右子树
     int val;//当前节点的值
@@ -642,6 +642,69 @@ public class BinTree {
 
     }
 
+    //十九：求指定两个节点的最近的公共祖先：
+    /*思想：
+    * 1：写一个找节点路径的方法，并将路径保存在栈中
+    * 2：在两个栈中pop()值，当值相等的时候，就是他们的公共祖先：这也包含了一点链表求交点的问题：让长的先走*/
+    //思路：
+    //保存找两个节点的路径在栈中，然后就相当于与两条链表的相交问题;让路径长的先走差值步，然后依次进行比较
+
+    //1：获取节点的路径
+    public static boolean getNodePath(BTNode root,BTNode node,Stack<BTNode> path){
+        if(root==null){
+            return false;
+        }
+
+        path.push(root);
+        if(root==node){
+            return true;
+        }
+
+        //递归到root的左子树||右子树找node的路径
+        if(getNodePath(root.left,node,path)||getNodePath(root.right,node,path)){
+            return true;//找到了
+        }
+
+        //如果递归都完了还没有找到：说明该节点不再这个以root为根节点的额这颗树中，也就是没有共同的祖先
+        path.pop();
+        return false;//往回退就行了
+    }
+    public static BTNode lowestCommonAncestor(BTNode root, BTNode p, BTNode q) {
+        if(root==null||p==null||q==null){
+            return null;
+        }
+
+        //获取p,q节点的路径：
+        Stack<BTNode> pPath=new Stack<>();
+        Stack<BTNode> qPath=new Stack<>();
+        getNodePath(root,p,pPath);
+        getNodePath(root,q,qPath);
+
+        int sizep=pPath.size();
+        int sizeq=qPath.size();
+
+        //两个节点对应的路径的栈，让长的先走差值步即可，直到节点的个数相同
+        while(sizep!=0&&sizeq!=0){
+            if(sizep>sizeq){
+                pPath.pop();
+                sizep--;
+            }else if(sizep<sizeq){
+                qPath.pop();
+                sizeq--;
+            }else{
+                if(pPath.peek()==qPath.peek()){
+                    return pPath.peek();
+                }else{//两个栈找那个的元素相等的时候
+                    pPath.pop();
+                    qPath.pop();
+                    sizep--;
+                    sizeq--;
+                }
+            }
+        }
+        return null;
+    }
+
 
     public static void main(String[] args) {
         int[]arr={1,2,3,-1,-1,-1,4,5,-1,-1,6,-1,-1};
@@ -669,6 +732,8 @@ public class BinTree {
 
         binTree.postOrder();
         binTree.postOrderNor();
+
+       // System.out.println(lowestCommonAncestor(1,2,3).val);
 
         System.out.println("二叉树的节点：" + binTree.getNodeCount());
         System.out.println("二叉树的叶子节点个数：" + binTree.getLeafCount());
