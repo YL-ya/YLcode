@@ -1,8 +1,17 @@
 package com.dataStrcture;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
-
+import java.util.*;
+import java.util.Queue;
+/*PriorityQueue所包含接口：
+* 1：构造方法
+* 2：offer()
+* 3：peek()
+* 4：poll()
+* 5：clear()
+* TOP-K问题：
+* 1：排序sort，取前k个元素
+* 2：优先级队列：peek(),poll()
+* 3：构造平衡二叉树，打印前k个
+* priorityQueue：底层是堆*/
 public class TestPriorityQueue {
     public static void TestPriorityQueue1(){
         //创建优先级队列的三种方式：
@@ -11,6 +20,7 @@ public class TestPriorityQueue {
 
         //2：按照指定容量来进行构造：如果知道优先级队列中大概需要放多少个元素，最好使用该方法进行构造
         //不要用空的构造方法构造，因为在插入元素的时候需要扩容而影响程序的效率
+        //Capacity：不能小于1，若果小于1就抛出异常：非法参数
         PriorityQueue<Integer>p2=new PriorityQueue<>(20);
 
         //3：可以用一个集合来构造优先级队列，将来就会将集中的元素放在优先级队列中
@@ -67,5 +77,6 @@ public class TestPriorityQueue {
     }
     public static void main(String[] args) {
         TestPriorityQueue1();
+        TestPriorityQueue2();
     }
 }
