@@ -11,6 +11,7 @@ import java.util.Queue;
 * 1：排序sort，取前k个元素
 * 2：优先级队列：peek(),poll()
 * 3：构造平衡二叉树，打印前k个
+* 4：二叉搜索树：按照中速遍历回收k个数据
 * priorityQueue：底层是堆*/
 public class TestPriorityQueue {
     public static void TestPriorityQueue1(){
