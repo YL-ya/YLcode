@@ -2,33 +2,55 @@ package com.dataStrcture;
 
 import java.util.Arrays;
 
-//自定义优先级队列：
+//自定义优先级队列：让用户自己进行选择大小堆：利用多态，动态绑定：但是这个比较的接口，是自己写的，用的时候还得告诉用户的操作
 //为了实现简单，我们的自定义优先级队列中放的是int型
 //假设是实现一个小堆
+interface Comp{
+     int compare(int left,int right);//实现该接口的类里面要进行重写该方法
+}
+class Less implements Comp{
+    //0:left==right
+    //>0:left>right
+    //<0left<right
+    public int compare(int left,int right){
+        return left-right;//小堆
+    }
+}
+
+class Greater implements Comp{
+    public int compare(int left,int right){
+        return right-left;//大堆
+    }
+}
+
+
 public class MyPriorityQueue {
     private int[]arr;
     private int size;//表示优先级队列中有效元素的个数,不能用arr.length表示有效元素个数，因为length表示的数组的大小
+    Comp compare=null;
 
     //构造方法1：
-    public MyPriorityQueue(){
+    public MyPriorityQueue(Comp comp){
         //默认的容量大小是11
         arr=new int[11];
         size=0;
+        compare=comp;
     }
 
     //构造方法2：
-    public MyPriorityQueue(int Capacity){
+    public MyPriorityQueue(int Capacity,Comp comp){
         if(Capacity<1){
             //标准库：抛出一个非法参数的异常
             Capacity=11;
         }
         arr=new int[Capacity];//默认要为11
+        compare=comp;
 //        size=0;
     }
 
     //构造方法3：
     //注意：标准库中没有该种接口，是用的ArrayList，也就是说采用的是集合的方式来构造优先级队列的
-    public MyPriorityQueue(int[]array){
+    public MyPriorityQueue(int[]array,Comp comp){
         arr=new int[array.length];//自己根据用户提供的的参数进行构造多大的优先级队列
 
 
@@ -39,6 +61,7 @@ public class MyPriorityQueue {
         //将arr中的元素进行调整，满足堆的性质
 
         size=arr.length;
+        compare=comp;
 
         //找倒数第一个非叶子节点：也就是最后的一个叶子节点(数组中的最后一位)的双亲：(arr.length/2+1）
         int lastLeaf=arr.length>>1-1;
@@ -111,12 +134,14 @@ public class MyPriorityQueue {
 
 
             //在比较左右孩子的时候，一定保证右孩子存在：while()：该循环已经保证左孩子的存在了
-            if (child+1<size&&arr[child + 1] < arr[child]) {
+            //if (child+1<size&&arr[child + 1] < arr[child]) {
+            if (child+1<size&&compare.compare(arr[child+1],arr[child])<0) {
                 child += 1;
             }
 
             //检测双亲是否比较小的孩子小：
-            if (arr[child] < arr[parent]) {
+            //if (arr[child] < arr[parent]) {
+            if(compare.compare(arr[child],arr[parent])<0){//孩子比较小
                 //说明parent不满足小堆的性质：让双亲和孩子进行交换即可，也就是让parent和child进行交换
                 swap(parent, child);
 
@@ -136,7 +161,8 @@ public class MyPriorityQueue {
     private void shiftUp(int child){
         int parent=(child-1)>>1;
         while (child!=0){
-            if(arr[child]<arr[parent]){
+            //if(arr[child]<arr[parent]){
+            if(compare.compare(arr[child],arr[parent])<0){//利用我们自己写的比较器
                 swap(child,parent);
                 child=parent;
                 parent=(child-1)>>1;
@@ -171,7 +197,7 @@ public class MyPriorityQueue {
     //测试一下：
     public static void main(String[] args) {
         int []arr={5,3,7,1,3,6,8,0,2};
-        MyPriorityQueue mp=new MyPriorityQueue(arr);
+        MyPriorityQueue mp=new MyPriorityQueue(arr,new Less());
         /*new一个对象：
         * 1：在堆上分配内存空间
         * 2：调用构造函数进行初始化*/
