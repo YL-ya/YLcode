@@ -5,7 +5,11 @@ package com.arithmetic.sort;
 *       排序过程中每次从无序表中去除一个数据插入到有序表中去即可
 * 插入排序的特点：
 * 1：排序需要数组大小-1趟排序
-* 2：排序是直接将第一位上的数组认为是一个有序的表*/
+* 2：排序是直接将第一位上的数组认为是一个有序的表
+* 直接插入排序的优化：
+* 1：通过二分查找位置，而不是挨个济宁比较：快
+* 2：搬移元素
+* 3：插入*/
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -46,7 +50,7 @@ public class InsertSort {
             int insertVal=a[i];
             int insertIndex=i-1;
 
-            while(insertIndex>=0&&insertVal<a[insertIndex]){
+            while(insertIndex>=0&&insertVal<a[insertIndex]){//保证那个i-1时，数组不会越界
                 a[insertIndex+1]=a[insertIndex];
                 insertIndex--;
             }
