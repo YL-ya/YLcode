@@ -17,7 +17,7 @@ public class DonaldSort {
         /*int[]arr={8,9,1,7,2,3,5,4,6,0};
         System.out.println("排序前的数组"+Arrays.toString(arr));
         shellSort2(arr);*/
-        //测试事后的时间复杂度：随机产生80000个数
+        //测试希尔排序的事后时间复杂度：随机产生80000个数
         int[] arr = new int[80000];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (int) (Math.random() * 80000);//生成[0,80000）的随机数
@@ -36,7 +36,7 @@ public class DonaldSort {
         * 排序后的时间是：2020-15-28 23:15:53*/
 
         //进行希尔排序移动法：
-        shellSort2(arr);
+        shellSort3(arr);
         /*排序前的时间是：2020-21-28 23:21:34
         * 排序后的时间是：2020-21-28 23:21:35*/
 
@@ -114,7 +114,7 @@ public class DonaldSort {
     public static void shellSort2(int[]a){
         //增量的控制采用循环,并逐步缩小增量
         for (int i = a.length/2; i >0 ; i/=2) {
-            //从i个元素开始，卓哥对其所在的组进行直接插入排序
+            //从i个元素开始，逐个对其所在的组进行直接插入排序
             for (int j = i; j < a.length; j++) {
                 int k=j;
                 int temp=a[k];
@@ -128,6 +128,30 @@ public class DonaldSort {
                     a[k]=temp;
                 }
             }
+        }
+    }
+
+    //希尔排序的另一种算法：时间复杂度：O(N^1.25)~O(1.6N^1.25)：跟gap取值有关，所以时间复杂度是不一样的
+    public static void shellSort3(int[]a){
+        //int gap=3;
+        int gap=a.length;
+        while (gap>1) {
+            gap=gap/3+1;//gap：每次除以2   可每次取素数
+            for (int i = gap; i < a.length; i++) {
+                //1：找到待插入的元素在前面的位置：
+                int key = a[i];
+                int end = i - gap;
+
+                //2：待插入元素为小的情况下进行交换即可：
+                while (end >= 0 && key < a[end]) {
+                    a[end + gap] = a[end];
+                    end -= gap;
+                }
+
+                //3：插入元素：
+                a[end + gap] = key;
+            }
+            gap--;
         }
     }
 }
