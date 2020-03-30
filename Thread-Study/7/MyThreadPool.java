@@ -18,8 +18,10 @@ public class MyThreadPool {
                         while (true){
                             // 从仓库取包裹：
                             // 1.成功取出包裹（任务），方法返回
-                            // 2.仓库里取不出包裹（其他员工正在取阻塞在synchronized代码行，仓库没有包裹wait方法阻塞）
-                            Runnable task = queue.take();//直接在仓库中取任务即可
+                            // 2.仓库里取不出包裹（其他员工正在取阻塞在synchronized代码行，
+                            //                    仓库没有包裹wait方法阻塞）
+                            Runnable task = queue.take();//直接在仓库中取任务即可(在这里可能是不会成功阻塞在这里的)
+
                             // 正式员工来送快递（当前线程通过实例方法调用来执行任务）
                             task.run();
                         }
