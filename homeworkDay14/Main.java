@@ -1,6 +1,128 @@
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
+//13：放蛋糕：
+public class Main{
+    public static void main(String[] args) {
+        int a=3;
+        int b=2;
+        
+
+    }
+}
+//14：最小公倍数
+/*
+public class Main{
+    public static void main(String[] args){
+        Scanner input=new Scanner(System.in);
+        int a=input.nextInt();
+        int b=input.nextInt();
+        jude(a,b);
+    }
+    public static void jude(int a,int b){
+        if(a<=0||b<=0){
+            System.out.println("无法计算");
+        }else if(a%b==0){
+            System.out.println(a);
+        }else if(b%a==0){
+            System.out.println(b);
+        }else{
+            int sum=1;
+            int chushu=2;//从2开始除
+            int min=Math.min(a,b);
+            while(chushu<=min){
+                if(a%chushu==0&&b%chushu==0){
+                    a=a/chushu;
+                    b=b/chushu;
+                    sum*=chushu;
+                }
+                if(a%chushu!=0||b%chushu!=0){
+                    chushu++;
+                }
+            }
+            //退出循环是a，b两值都为质数的时候
+            System.out.println(a*b*sum);
+        }
+    }
+}*/
+
+//9：神奇口袋，总量40，方法多少种
+/*
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNextInt()) {
+            int kinds = scanner.nextInt();
+            int[] arr = new int[kinds];
+            for (int i = 0; i < kinds; i++) {
+                arr[i] = scanner.nextInt();
+            }
+            System.out.println(differentkinds(arr, kinds, 40,0));
+        }
+    }
+
+    public static int differentkinds(int[] arr, int n, int v,int index) {
+        if (v == 0) {
+            return 1;
+        }
+        if (n == 0) {
+            return 0;
+        }else {
+            //从后往前装，最后一个开始，装上n个后，体积减少，继续往前
+            //装上n个后，如果无解。删除该包。然后从n-1开始继续往前装
+            return differentkinds(arr,n-1,v-arr[index],index+1)
+                    +differentkinds(arr,n-1,v,index+1);
+        }
+    }
+}*/
+
+
+//10：利用两个栈实现一个队列：
+/*
+public class Main {
+    Stack<Integer> stack1 = new Stack<Integer>();
+    Stack<Integer> stack2 = new Stack<Integer>();
+
+    public void push(int node) {
+        stack1.push(node);
+    }
+    public int pop() {
+        if(stack2.size()<=0){//保证stack2的栈中是没有元素的情况下
+            while(stack1.size()!=0){
+                stack2.push(stack1.pop());//循环将栈1中的值，push到栈2中
+            }
+        }
+        return stack2.pop();
+    }
+}*/
+
+//8：删除第二个字符串中所包含的元素
+/*
+public class Main {
+    public static void main(String[] args){
+        Scanner input=new Scanner(System.in);
+        String a=input.nextLine();
+        String b=input.nextLine();
+        System.out.println(jude(a,b));
+    }
+
+    public static String jude(String a,String b){
+        StringBuffer c=new StringBuffer();
+        for (int i = 0; i <a.length() ; i++) {
+            for (int j = 0; j <b.length() ; j++) {
+                if(a.charAt(i)!=b.charAt(j)){
+                    continue;
+                }else {
+                    i++;
+                }
+            }
+            c.append(a.charAt(i));
+        }
+        return c.toString();
+    }
+}*/
+
+
+//7：选6袋和8袋
+/*
 public class Main {
     public static void main(String[] args) {
         int a=20;
@@ -33,7 +155,7 @@ public class Main {
             return;
         }
     }
-}
+}*/
 
 //6：括号匹配问题：
 /*
