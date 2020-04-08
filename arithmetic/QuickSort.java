@@ -17,7 +17,9 @@ import java.util.Stack;
 /*缺点：极端：最优：场景：数据乱序；   1：平分区间(平衡二叉树：高度：log2(N)；(平均和最优)时间复杂度：Nlog2(N))
              最差：场景：数据接近有序；2：一个区间没有数据(取到的基本是最值：相当于单支树；树的高度：N;时间复杂度就是O(N^2))
 * 1：递归的话，栈容量不够，资源消耗量大
-* 2：*/
+* 2：采取的方法，在最后剩的数据进行插入排序
+* 3：递归函数空间复杂度：递归的深度*每次递归所需要的空间
+* 4：快排的空间复杂度是log2N*/
 public class QuickSort {
     public static void main(String[] args) {
         int[]arr={3,8,2,6,9,7,1,4,0,5};
@@ -211,7 +213,7 @@ public class QuickSort {
         return prev;
     }
 
-    public static void swap(int[]arr,int parent,int child){//为什么不传数组，因为现在数组都是内部元素
+    public static void swap(int []arr,int parent,int child){//为什么不传数组，因为现在数组都是内部元素
         int temp=arr[parent];
         arr[parent]=arr[child];
         arr[child]=temp;
