@@ -1,13 +1,269 @@
+import org.junit.Test;
+import java.math.*;
 import java.util.*;
+public class Main{
+    
+}
+//22：数组A构建数组B：B[i]=A[0]*A[1]*...A[i-1]*A[i+1]*A[n-1];也就说不包含A[i]即可
+/*
+public class Solution {
+    public int[] multiply(int[] A) {
+        if(A==null||A.length==0){
+            return A;
+        }
+        int[]B=new int[A.length];
+        for(int i=0;i<B.length;i++){
+            int sum=1;
+            for(int j=0;j<A.length;j++){
+                if(i!=j){
+                    sum*=A[j];
+                }
+            }
+            B[i]=sum;
+        }
+        return B;
+    }
+}
+*/
+
+//21：升序输出一个整数包含（0~9）数字的个数：
+/*public class Main{
+    public static void main(String[] args){
+        int[] count = new int[] {0,0,0,0,0,0,0,0,0,0};
+        Scanner sc = new Scanner(System.in);
+        BigInteger N;
+        N = sc.nextBigInteger();
+        Vector<Integer> num = new Vector<>();
+        do {
+            BigInteger M = N.mod(BigInteger.valueOf(10));
+            num.add(M.intValue());
+            N = N.divide(BigInteger.valueOf(10));
+        } while (N.compareTo(BigInteger.valueOf(0)) > 0);
+        for (int i = 0; i < num.size(); ++i) {
+            switch (num.get(i)) {
+                case 0:
+                    ++count[0];
+                    break;
+                case 1:
+                    ++count[1];
+                    break;
+                case 2:
+                    ++count[2];
+                    break;
+                case 3:
+                    ++count[3];
+                    break;
+                case 4:
+                    ++count[4];
+                    break;
+                case 5:
+                    ++count[5];
+                    break;
+                case 6:
+                    ++count[6];
+                    break;
+                case 7:
+                    ++count[7];
+                    break;
+                case 8:
+                    ++count[8];
+                    break;
+                case 9:
+                    ++count[9];
+                    break;
+                default:
+                    break;
+            }
+        }
+        for (int j = 0; j < 10; ++j) {
+            if (count[j] != 0)
+                System.out.println(j + ":" + count[j]);
+        }
+    }
+}*/
+/*public class Main {
+    public static void main(String[] args) {
+        Thread t=new Thread(){
+            @Override
+            public void run() {
+                pong();
+            }
+        };
+        t.run();
+        System.out.println("ping");
+    }
+    static void pong(){
+        System.out.println("pong");
+    }
+}*/
+//19：最少步数到裴波那契
+/*思路：进行循环构造斐波那契数，直到大于咱们输入的数*/
+/*public class Main {
+    @Test
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int m = scanner.nextInt();
+        System.out.println(getMinNum(m));
+    }
+    private static int getMinNum(int m) {
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(0);
+        list.add(1);
+        list.add(1);
+        int n = 2;
+        while (list.get(n) <= m) {
+            n++;
+            list.add(list.get(n - 1) + list.get(n - 2));
+        }
+        //退出循环是，咱们的菲数已经大于咱们输入的数，济宁前后比较，输出最小的数即可
+        if (list.get(n) - m < m - list.get(n - 1)) {
+            return list.get(n) - m;
+        } else {
+            return m - list.get(n - 1);
+        }
+    }
+}*/
+//18：阶乘结果末尾是几个0
+/*
+public class Main {
+    public static void main1(String[] args){
+        Scanner sc=new Scanner(System.in);
+
+        while (sc.hasNext()){
+            int a=sc.nextInt();
+            int b=Jc(a);
+            System.out.println(b);
+        }
+    }
+    public static int Jc(int a){
+        if(a<5){
+            return 0;//因为小于5阶乘的结果数是没有0的
+        }
+        long sum=1;//边乘边取0
+        //求阶乘：
+        int count=0;
+        for (int i = 2; i <=a ; i++) {
+            sum*=i;
+
+            while (sum>0){
+                if(sum%10>0){
+                    break;//个位不是0，直接跳出循环
+                }
+                count++;//个位是0的
+                sum/=10;//去挑个位继续检查
+            }
+        }
+        return count;
+    }
+*/
+    //17：翻转字符串
+
+    /*//求阶乘：不能这样，会超出数值的范围
+    public static int Jc(int a){
+        if(a==1||a==0){
+            return 1;
+        }
+        return a*Jc(a-1);
+    }
+}*/
+   /* *//*public class TestClassi{*//*
+    private static void testMethod( ) {
+        System.out.println("testMethod");
+    }
+
+    public static void main(String[] args) {
+        ((Main)null).testMethod();
+    }*/
+
+   /* public static void main(String[] args) {
+        int index = getLastDeletedIndex(8);
+        System.out.println("The last index deleted is " + index);*/
+
+
+/*
+        Scanner sc = new Scanner(System.in);
+        int[]a=new int[1000];
+        int count=0;
+        while (sc.hasNext()) {
+            for (int i = 0; i <a.length ; i++) {
+                a[i]=sc.nextInt();
+                count++;
+            }
+        }
+        int[]b=new int[count];
+        for (int i = 0; i <b.length ; i++) {
+            b[i]=a[i];
+        }
+*/
+
+
+
+/*    public static int getLastDeletedIndex(int len) {
+        if (len <= 0) { // 如果数组长度不满足要求则返回 -1
+            return -1;
+        }
+
+        int[] arr = new int[len];
+        for (int i = 0; i < len; i++) { // 初始化每个元素的值为当前下标
+            arr[i] = len;
+        }
+
+        final int DELFLAG = len + 1; // 删除标志位
+        int currentSize = len; // 记录数组当前有效长度（即未被置为删除标志的元素个数），最后变为 0
+        final int STEP = 2; // 步长
+        int count = 0; // 步长计数
+        int lastDelIndex = 0; // 记录最后被删除的元素的下标
+        int i = 0; // 循环下标
+
+        while (currentSize != 0) {
+            if (arr[i] != DELFLAG) { // 判读当前元素是否等于删除标志
+                if (count++ == STEP) { // 当步长计数满足步长则
+                    arr[i] = DELFLAG; // 将元素置为删除标志位
+                    lastDelIndex = i; // 记录该处下标
+                    currentSize--; // 有效数组长度减 1
+                    count = 0; // 步长计数归零
+                    System.out.println("Deleted index is " + i % len);
+                }
+            }
+            i = (i + 1) % len; // 下标取余实现循环下标
+        }
+        return lastDelIndex;
+    }
+}*/
+//16：找出n个数中最小的k个
+/*public class Main{
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        ArrayList<Integer> a=new ArrayList<>(100);
+        while (sc.hasNext("stop")){
+            a.add(sc.nextInt());
+        }
+        int key=a.get(a.size()-1);
+        a.remove(a.size()-1);
+        peek(a,key);
+    }
+    public static void peek(ArrayList<Integer> a,int b){
+       int[]c=new int[a.size()];
+        for (int i = 0; i <a.size() ; i++) {
+            c[i]=a.get(i);
+        }
+        Arrays.sort(c);
+        for (int i = 0; i <b ; i++) {
+            System.out.print(c[i]+" ");
+        }
+    }
+}*/
+
 //13：放蛋糕：
+/*
 public class Main{
     public static void main(String[] args) {
         int a=3;
         int b=2;
-        
-
     }
 }
+*/
+
 //14：最小公倍数
 /*
 public class Main{
