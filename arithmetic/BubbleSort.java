@@ -9,22 +9,22 @@ import java.util.Date;
 // 因此要在排序的过程中设置一个标志flag判断是否交换过，从而减少不必要的比较（可以在冒泡排序之后进行优化）
 /*
 * 冒泡排序特点：
-* 1：一共要进行数组大小减一的次数
+* 1：一共要进行数组大小减一趟排序
 * 2：每一趟排序的次数在减少
 * 3：优化：如果我们发现在某趟排序中，没有发生过一次交换，可以提前结束冒泡排序*/
 public class BubbleSort {
     public static void main(String[] args) {
-        /*//1：测试一把：
+        //1：测试一把：
         int[] arr = {3, 9, -1, 10, -2};
         System.out.println("排序前的数组："+Arrays.toString(arr));
-        bubbleSort(arr);
+        BubbleSort(arr);
         //因为数组是引用类型的，所以可以直接进行输出
-        System.out.println("排好序的数组："+Arrays.toString(arr));*/
+        System.out.println("排好序的数组："+Arrays.toString(arr));
 
         /*
          * 2：测试冒泡排序的时间复杂度：
          * 2.1：事前：O(n^2)
-         * 2.2：事后：随机产生80000个数据，进行测试*/
+         * 2.2：事后：随机产生80000个数据，进行测试*//*
         int[] arr = new int[80000];
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (int) (Math.random() * 80000);//生成[0,80000）的随机数
@@ -44,7 +44,7 @@ public class BubbleSort {
         Date date2 = new Date();
         String data2 = simpleDateFormat.format(date2);
         System.out.println("排序后的时间是：" + data2);
-        //总结：时间花费了14秒，效率比较的低
+        //总结：时间花费了14秒，效率比较的低*/
     }
 
     //3：将前面的冒泡排序算法，封装成一个方法：
@@ -69,6 +69,38 @@ public class BubbleSort {
                 flag=false;
             }
         }
+    }
+
+    public static void BubbleSort(int[]a){
+
+        //用来优化冒泡：冒泡冒了一定的趟数之后可能已经有序了，就不用再进行冒泡排序了
+        //如果已经有序，就不会进行交换
+        boolean isChange=false;//用来记录是否发生过交换
+
+        //外层循环是：冒泡的趟数
+        for (int i = 0; i < a.length-1; i++) {
+
+            //一趟排序：将最大的向后面排：冒泡的方式
+            for (int j = 1; j < a.length-i; j++) {//-i是说明第几趟排序的时候，
+                                                   // 前面的位置已经将几个最大的数放在了数组的后面
+                if (a[j - 1] > a[j]) {
+                    swap(a, j - 1, j);
+                    isChange=true;
+                }
+            }
+
+            //如果一趟排完之后发现根本没有进行过交换,直接结束冒泡排序，因为已经有序了
+            if(isChange==false){
+                return;
+            }
+        }
+    }
+    public static void swap(int[]a,int b,int c){
+        int temp=a[b];
+        a[b]=a[c];
+        a[c]=temp;
+    }
+}
 
 
 
@@ -139,5 +171,3 @@ public class BubbleSort {
             }
         }
         System.out.println("第四趟排序后的数组："+ Arrays.toString(arr));*/
-    }
-}
