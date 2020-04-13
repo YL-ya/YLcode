@@ -1,9 +1,140 @@
 import org.junit.Test;
 import java.math.*;
 import java.util.*;
-public class Main{
-    
+abstract class Aniaml{
+    abstract void say();
 }
+//26：两个超长整数的加法：
+public class Main{
+    public static void main(String[] args){
+        Scanner input=new Scanner(System.in);
+        while(input.hasNext()){
+            String s1=input.next();
+            String s2=input.next();
+            BigInteger num1=new BigInteger(s1);//采用BigInteger可以直接进行大整数进行计算
+            BigInteger num2=new BigInteger(s2);
+            System.out.println(num1.add(num2));
+        }
+    }
+    public static String AddLongInteger(String addend,String augend) {
+        ArrayList<Integer> a = new ArrayList<>();
+        int sum = 0;
+        for (int i = augend.length() - 1; i >= 0; i--) {
+            for (int j = addend.length() - 1; j >= 0; j--) {
+                int f1 = addend.charAt(i) - 48;
+                int f2 = augend.charAt(i) - 48;
+                sum = f1 + f2;
+                if (sum >= 10) {
+                    sum = sum - 10;
+                    ((addend.charAt(j + 1) - 48) + 1) + 48;
+                }
+                a.add(sum);
+            }
+        }
+    }
+}
+   /* static boolean ou(char c){
+        System.out.println(c);
+        return true;
+    }
+    */
+       /* Thread t = new Thread() {
+            @Override
+            public void run() {
+                dianping();
+            }
+        };
+        t.start();
+        System.out.println("dangngln");
+    }
+    static void dianping(){
+        System.out.println("dianping");*/
+       /* int i=0;
+        for(ou('A');ou('B')&&i<2;ou('C')){
+            i++;
+            ou('D');
+        }*/
+
+//打印出来是good and gbc:字符串是在池中的，一旦创建就不会改变
+/*class Example {
+    String str = new String("good");
+    char[] ch = { 'a', 'b', 'c' };
+
+    public static void main(String args[]) {
+        Example ex = new Example();
+        ex.change(ex.str, ex.ch);
+        System.out.print(ex.str + " and ");
+        System.out.print(ex.ch);
+    }
+
+    public static void change(String str, char ch[])
+    {
+        str = "test ok";
+        ch[0] = 'g';
+    }
+}*/
+
+//24：生成格雷码：
+/*public class Main{
+    public static String[] getGray(int n) {
+        // write code here
+        String[] res=null;
+        if(n==1){
+            res=new String[]{"0","1"};
+        }else{
+            String[]str=getGray(n-1);
+            //每多一位，我们的格雷码长度增加1倍
+            res=new String[str.length*2];
+            for(int i=0;i<str.length;i++){
+                //添加0后变成(000,001,011,010)
+                res[i]="0"+str[i];
+                //  添加1后需要顺序反向就变成(110,111,101,100）
+                res[res.length-1-i]="1"+str[i];
+            }
+        }
+        return res;
+    }
+}*/
+
+//23：不用辅助变量交换两值
+/*public class Main{
+    public static void main(String[] args) {
+        int[]a=new int[]{1,2};
+        System.out.println(Arrays.toString(exchangeAB1(a)));
+        System.out.println(Arrays.toString(exchangeAB2(a)));
+    }
+    public static int[] exchangeAB2(int[] AB) {
+        AB[0]=AB[0]^AB[1];
+        AB[1]=AB[0]^AB[1];
+        AB[0]=AB[0]^AB[1];
+        return AB;
+    }
+    public static int[] exchangeAB1(int[] AB) {
+        // write code here
+        AB[0]=AB[0]+AB[1];
+        AB[1]=AB[0]-AB[1];
+        AB[0]=AB[0]-AB[1];
+        return AB;
+    }
+}*/
+
+    /*try{
+
+        }catch (java.io.FileNotFoundException ex){
+            System.out.println("a");
+        }catch (java.io.IOException ex){
+            System.out.println("b");
+        }catch (java.lang.Exception ex){
+            System.out.println("c");
+        }*/
+        /*String a="hello";
+        String b="he"+new String("llo");
+        System.out.println(a==b);*/
+   /* public abstract class Main{
+        public int cos=5;
+        public abstract void meth(int a);
+    }*/
+
 //22：数组A构建数组B：B[i]=A[0]*A[1]*...A[i-1]*A[i+1]*A[n-1];也就说不包含A[i]即可
 /*
 public class Solution {
