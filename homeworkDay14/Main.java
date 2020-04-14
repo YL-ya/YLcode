@@ -4,8 +4,45 @@ import java.util.*;
 abstract class Aniaml{
     abstract void say();
 }
+//28：验证尼科彻斯定理：
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in) ;
+        while(sc.hasNext()){
+            int N = sc.nextInt() ;
+            String s = decompose(N) ;
+            System.out.println(s);
+        }
+        sc.close();
+    }
+    private static String decompose(int n) {
+        int [] array = new int[n] ;
+        int mid = n / 2 ;
+        if(n*n % 2 == 0)
+            array[mid] = n*n + 1;
+        else
+            array[mid] = n*n ;
+        for(int i = mid; i >= 1 ; i--){
+            int temp = array[i] ;
+            array[i - 1] = temp - 2 ;
+        }
+        for(int j = mid ; j < n - 1; j++){
+            int temp = array[j] ;
+            array[j + 1] = temp + 2 ;
+        }
+        StringBuffer sb = new StringBuffer() ;
+        for(int k = 0 ; k < n ; k++){
+            if(k != n - 1)
+                sb.append(array[k] + "+") ;
+        }
+        sb.append(array[n - 1]) ;
+        return sb.toString();
+    }
+
+}
+
 //26：两个超长整数的加法：
-public class Main{
+/*public class Main{
     public static void main(String[] args){
         Scanner input=new Scanner(System.in);
         while(input.hasNext()){
@@ -15,8 +52,8 @@ public class Main{
             BigInteger num2=new BigInteger(s2);
             System.out.println(num1.add(num2));
         }
-    }
-    public static String AddLongInteger(String addend,String augend) {
+    }*/
+/*    public static String AddLongInteger(String addend,String augend) {
         ArrayList<Integer> a = new ArrayList<>();
         int sum = 0;
         for (int i = augend.length() - 1; i >= 0; i--) {
@@ -26,13 +63,14 @@ public class Main{
                 sum = f1 + f2;
                 if (sum >= 10) {
                     sum = sum - 10;
-                    ((addend.charAt(j + 1) - 48) + 1) + 48;
+                    int temp = addend.charAt(j - 1) - 48;
+                    temp += 1;
+                    //addend.charAt(j)=temp+48;
                 }
                 a.add(sum);
             }
         }
-    }
-}
+    }*/
    /* static boolean ou(char c){
         System.out.println(c);
         return true;
