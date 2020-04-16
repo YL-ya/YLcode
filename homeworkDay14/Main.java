@@ -40,6 +40,25 @@ public class Main {
     }
 }
 
+public Node copyRandomList(Node head) {
+        if(head==null){
+            return null;
+        }
+        Map<Node,Node> m=new HashMap<>();
+        Node node=head;
+        while(node!=null){
+            m.put(node,new Node(node.val));
+            node=node.next;
+        }
+        node=head;
+        while(node!=null){
+            m.get(node).next=m.get(node.next);
+            m.get(node).random=m.get(node.random);
+            node=node.next;
+        }
+    }
+    return m.get(head);
+
 //26：两个超长整数的加法：
 /*public class Main{
     public static void main(String[] args){
