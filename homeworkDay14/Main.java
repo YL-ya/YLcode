@@ -1,11 +1,105 @@
 import org.junit.Test;
+import sun.swing.PrintColorUIResource;
+
 import java.math.*;
 import java.util.*;
 abstract class Aniaml{
     abstract void say();
 }
+/*给了单词的数组，输出：出现次数最多的前K个单词，如果次数相同，按照字母次序进行排序：TOP-K问题
+* TOP-K问题，一定会用到堆--优先级队列
+* 思路：
+* 1：统计单词出现的次数<单词，次数>
+* 2：创建一个堆(也就是创建一个优先级队列)，然后将单词-次数：默认情况下是小堆
+* 3：取出前K个单词
+* 总结：前K个最大的，进行创建小堆的优先级队列：这样留下来的优先级队列中就是最大的元素
+*       前k个最小的，进行创建大堆的优先级队列：这样留下来的是优先级队列最小的元素*/
+class Cmp implements Comparator<Map.Entry<String,Integer>>{
+
+    @Override
+    public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+        if(o2.getValue() > o1.getValue()){
+            return 1;
+        }
+
+        if(o2.getValue() == o1.getValue() && o1.getKey().compareTo(o2.getKey()) > 0){
+            return 1;
+        }
+
+        if(o2.getValue() == o1.getValue() && o1.getKey().compareTo(o2.getKey()) == 0){
+            return 0;
+        }
+
+        return -1;
+    }
+}
+
+public class Main{
+    public static void main(String[] args) {
+        String[] a=new String[]{};
+
+    }
+    public static List<String> topK(String[] words,int k){
+        //1：统计每个单词出现的次数
+        Map<String,Integer> m=new HashMap<>();
+        for (int i = 0; i <words.length ; i++) {
+            m.put(words[i],m.getOrDefault(words[i],0)+1);
+        }
+
+        //2：创建优先级队列：
+        PriorityQueue<Map.Entry<String ,Integer>> p=new PriorityQueue<>(new Cmp());
+        for (Map.Entry<String,Integer> e:m.entrySet()) {
+            p.offer(e);
+        }
+
+        List<String> l=new ArrayList<>();
+        for (int i = 0; i <k ; i++) {
+            l.add(p.poll().getKey());
+        }
+        return l;
+    }
+}
+//坏键盘：用Set可以了
+/*public class Main{
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        while (sc.hasNextLine()){
+            //1：循环接收用户的输入
+            String right=sc.nextLine().toUpperCase();
+            String wrong=sc.nextLine().toUpperCase();
+
+            //2：将wrong的每个字符放在Set中
+            //将正常的键保存在Set中
+            Set<Character> s=new HashSet<>();//因为不用有序
+            for(int i=0;i<wrong.length();i++){
+                s.add(wrong.charAt(i));
+            }
+
+            //3：检测right中每个字符是否Set是否出现过
+            //本想着Set去重，但是HashSet底层是哈希表，当你输入12345，宾烈结果不一定是12345，所以不能用遍历进行打印
+            Set<Character> b=new HashSet<>();
+            for (int i = 0; i <right.length() ; i++) {
+                char ch=right.charAt(i);
+
+                //检测是否是坏键
+                if(!s.contains(ch)){
+                    if( b.add(ch)){
+                        //如果插入成功就说明，这个是坏键，直接将其顺手就输出了
+                        System.out.println(ch);
+                    }
+                }
+            }
+
+           *//* //进行遍历
+            for (Character ch:b) {
+                System.out.print(ch);
+            }*//*
+            System.out.println();
+        }
+    }
+}*/
 //28：验证尼科彻斯定理：
-public class Main {
+/*public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in) ;
         while(sc.hasNext()){
@@ -38,26 +132,7 @@ public class Main {
         sb.append(array[n - 1]);
         return sb.toString();
     }
-}
-
-public Node copyRandomList(Node head) {
-        if(head==null){
-            return null;
-        }
-        Map<Node,Node> m=new HashMap<>();
-        Node node=head;
-        while(node!=null){
-            m.put(node,new Node(node.val));
-            node=node.next;
-        }
-        node=head;
-        while(node!=null){
-            m.get(node).next=m.get(node.next);
-            m.get(node).random=m.get(node.random);
-            node=node.next;
-        }
-    }
-    return m.get(head);
+}*/
 
 //26：两个超长整数的加法：
 /*public class Main{
