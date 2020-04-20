@@ -6,6 +6,155 @@ import java.util.*;
 abstract class Aniaml{
     abstract void say();
 }
+/*public class Main1{
+    public static void main(String[] args){
+        System.out.println("请输入人数: ");
+        Scanner input=new Scanner(System.in);
+        int n=Integer.parseInt(input.nextLine());
+        System.out.println("请输排序方式,0或1: ");
+        int sort;
+        sort=Integer.parseInt(input.nextLine());
+        if(n==0){
+            return;
+        }else{
+            Person[] persons=new Person[100];
+            for(int i=0;i<n;i++){
+            persons[i]=new Person();
+                String str=input.nextLine();               
+                String[] ss=str.split(" ");
+                int a=Integer.parseInt(ss[1]);                               
+                persons[i].set(ss[0],a);                
+            }
+            Person temp=new Person();
+            if(sort==1){
+                for(int i=0;i<n-1;i++){
+                    for(int j=0;j<n-1-i;j++){
+                        if(persons[j].grade>persons[j+1].grade){
+                            temp=persons[j];
+                            persons[j]=persons[j+1];
+                            persons[j+1]=temp;
+                        }
+                    }
+                }
+            }else{
+                for(int i=0;i<n-1;i++){
+                    for(int j=0;j<n-1-i;j++){
+                        if(persons[j].grade<persons[j+1].grade){
+                            temp=persons[j];
+                            persons[j]=persons[j+1];
+                            persons[j+1]=temp;
+                        }
+                    }
+                }
+            }
+            for(int i=0;i<n;i++){
+                System.out.println(persons[i].name+" "+persons[i].grade);
+            }
+        }
+    }
+}
+class Person{
+    String name;
+    int grade;
+    public void set(String name,int grade){
+        this.name=name;
+        this.grade=grade;
+    }
+    @Override
+    public String toString() {
+    // TODO Auto-generated method stub
+    return "name: "+name+"grade: "+grade;
+    }
+}*/
+public class Main{
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("请输入人数：");
+        int a=sc.nextInt();
+        System.out.println("请选择：");
+        int b=sc.nextInt();
+        
+        String[] d=c.split(" ");
+        int f=Integer.valueOf(d[1]);
+        Map<String,Integer> m=new TreeMap<>();
+        for (int i = 0; i < args.length ; i++) {
+            m.put(d[0],f);
+        }
+        for (Map.Entry<String,Integer> e:m.entrySet()){
+            System.out.println(e.getKey()+" "+e.getValue());
+            
+        }
+    }
+}
+//37：判断是否是子串
+/*public class Main{
+    public static void main(String[] args) {
+        String[]p={"a","b","c","d"};
+        String s="abc";
+        System.out.println(Arrays.toString(chkSubStr1(p,p.length,s)));
+    }
+    public static boolean[] chkSubStr(String[] p, int n, String s) {
+        Set<Character> a=new TreeSet<>();
+        for (int i = 0; i < s.length(); i++) {
+            a.add(s.charAt(i));
+        }
+        boolean[]b=new boolean[n];
+        for (int i = 0; i <p.length ; i++) {
+            b[i]=!a.add(p[i].charAt(0));
+        }
+        return b;
+    }
+    public static boolean[] chkSubStr1(String[] p, int n, String s) {
+        boolean[] bool=new boolean[n];
+        for(int i=0;i<n;i++){
+            bool[i]=s.contains(p[i]);
+        }
+        return bool;
+    }
+
+    //博客的高效判定子串
+    public boolean[] chkSubStr2(String[] p, int n, String s) {
+        boolean[] bool=new boolean[n];
+        for(int i=0;i<n;i++){
+            bool[i]=s.contains(p[i]);
+        }
+        return bool;
+    }
+
+}*/
+//35：百万富翁和陌生人交换前
+
+
+//36：基因：CG比例最大的几位：
+/*思路：
+* 1：双层循环：外层循环+n,内层循环+1但是长度只有n
+* 2：记录位置，然后直接用str.substring(开始，结尾)*/
+/*
+public class Main{
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        String str=sc.next();
+        int n=sc.nextInt();
+        int max=0;
+        int maxIndex=0;
+        //思路：从0号位置开始n个n个的进行遍历并且判断
+        for(int i=0;i<=str.length()-n;i++){
+            //String sub=str.substring(i,i+n);//截取子串
+            int count=0;
+            for(int j=i;j<i+n;j++){
+                if(str.charAt(j)=='C'||str.charAt(j)=='G'){
+                    count++;
+                }
+                if(count>max){
+                    max=count;
+                    maxIndex=i;
+                }
+            }
+        }
+        System.out.println(str.substring(maxIndex,maxIndex+n));
+    }
+}
+*/
 /*给了单词的数组，输出：出现次数最多的前K个单词，如果次数相同，按照字母次序进行排序：TOP-K问题
 * TOP-K问题，一定会用到堆--优先级队列
 * 思路：
@@ -14,7 +163,7 @@ abstract class Aniaml{
 * 3：取出前K个单词
 * 总结：前K个最大的，进行创建小堆的优先级队列：这样留下来的优先级队列中就是最大的元素
 *       前k个最小的，进行创建大堆的优先级队列：这样留下来的是优先级队列最小的元素*/
-class Cmp implements Comparator<Map.Entry<String,Integer>>{
+/*class Cmp implements Comparator<Map.Entry<String,Integer>>{
 
     @Override
     public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
@@ -58,7 +207,7 @@ public class Main{
         }
         return l;
     }
-}
+}*/
 //坏键盘：用Set可以了
 /*public class Main{
     public static void main(String[] args) {
