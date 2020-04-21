@@ -6,7 +6,78 @@ import java.util.*;
 abstract class Aniaml{
     abstract void say();
 }
-/*public class Main1{
+class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+//40：划分列表：大的在该节点的后面，小的在该节点的前面
+public class Main{
+    public static void main(String[] args) {
+        ListNode head=new ListNode(7);
+        head.next=new ListNode(6);
+        head.next.next=new ListNode(5);
+        head.next.next.next=new ListNode(8);
+        head.next.next.next.next=new ListNode(4);
+        ListNode cur=partition(head,5);
+        while (cur!=null){
+            System.out.println(cur.val);
+            cur=cur.next;
+        }
+    }
+    public static ListNode partition(ListNode pHead, int x) {
+        // write code here
+        ListNode newHead=new ListNode(x);
+        ListNode temp=newHead;
+        ListNode cur=pHead;
+        ListNode cur1=pHead;
+        while(cur.next!=null){
+            if(cur.val>x){
+                temp.next=cur;
+                temp=temp.next;
+                cur=cur.next;
+            }else {
+                cur1.next=cur;
+                cur1=cur1.next;
+                cur=cur.next;
+            }
+        }
+        cur1.next=newHead.next;
+        return pHead;
+    }
+}
+//39：红包金额，找出大于数组一半的数字：
+/*public class Main{
+    public static void main(String[] args) {
+        int[]a={1,2,3,4,2,2,5,2,2,2};
+        System.out.println(getValue(a,a.length));
+    }
+    public static int getValue(int[] gifts, int n) {
+        if(gifts.length==0||n<=0){
+            return 0;
+        }
+        Map<Integer,Integer> m=new TreeMap<>();
+        for (int i = 0; i <n ; i++) {
+            if(m.containsKey(gifts[i])){
+                m.put(gifts[i],m.get(gifts[i])+1);
+            }else {
+                m.put(gifts[i],1);
+            }
+        }
+        for (int i = 0; i <n ; i++) {
+            if(m.get(gifts[i])>n/2){
+                return gifts[i];
+            }
+        }
+        return 0;
+    }
+}*/
+//38：排序输出学生的额成绩：
+/*
+public class Main1{
     public static void main(String[] args){
         System.out.println("请输入人数: ");
         Scanner input=new Scanner(System.in);
@@ -66,14 +137,14 @@ class Person{
     return "name: "+name+"grade: "+grade;
     }
 }*/
-public class Main{
+/*public class Main{
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
         System.out.println("请输入人数：");
         int a=sc.nextInt();
         System.out.println("请选择：");
         int b=sc.nextInt();
-        
+
         String[] d=c.split(" ");
         int f=Integer.valueOf(d[1]);
         Map<String,Integer> m=new TreeMap<>();
@@ -85,7 +156,7 @@ public class Main{
             
         }
     }
-}
+}*/
 //37：判断是否是子串
 /*public class Main{
     public static void main(String[] args) {
