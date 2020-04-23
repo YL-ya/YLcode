@@ -203,5 +203,12 @@ public class BSTree {
         System.out.println();
         System.out.println(t.leftMost());
         System.out.println(t.rightMost());
+        t.remove(8);
+        t.inOrder();;
+        t.remove(4);
+        t.inOrder();
+        t.remove(3);
+        t.inOrder();
+        //删除之后中序遍历还是有序的-
     }
 }
