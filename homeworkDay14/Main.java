@@ -1,4 +1,6 @@
+import homework.Day14;
 import org.junit.Test;
+import sun.reflect.generics.tree.Tree;
 import sun.swing.PrintColorUIResource;
 
 import java.math.*;
@@ -14,8 +16,104 @@ class ListNode {
         this.val = val;
     }
 }
-//40：划分列表：大的在该节点的后面，小的在该节点的前面
+class TreeNode{
+    TreeNode left;
+    TreeNode right;
+    int val=0;
+    public void  TreeNode(int val){
+        this.val=val;
+    }
+}
 public class Main{
+    
+}
+//42：给定N个整数，按题目要求计算A1~A5并在一行中输出，若某类数字不存在，则输出“N”;
+/*public class Main{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int num[] =new  int[N];//n个整数
+        //flag:A2中用到的功能+-
+        //conut:A4中计数
+        int A1=0,A2=0,A3=0,A4=0,A5=0,flag =1,count=0;
+
+        for(int i =0;i<N;i++){
+            num[i] = sc.nextInt();
+            //A1
+            if(num[i] % 5 == 0){
+                if(num[i] % 2 == 0)
+                    A1=A1+num[i];
+            }
+            //A2
+            if(num[i] % 5 == 1){
+                A2=A2+flag*num[i];
+                flag = -flag;
+            }
+            //A3
+            if(num[i] % 5 == 2){
+                A3++;
+            }
+            //A4
+            if(num[i] % 5 == 3){
+                A4=A4+num[i];
+                count++;
+            }
+            //A5
+            if(num[i] % 5 == 4){
+                if(num[i] > A5)
+                    A5=num[i];
+            }
+        }
+        if(A1 != 0){
+            System.out.print(A1+" ");
+        }else{
+            System.out.print("N"+" ");
+        }
+        if(A2 != 0){
+            System.out.print(A2+" ");
+        }else{
+            System.out.print("N"+" ");
+        }
+        if(A3 != 0){
+            System.out.print(A3+" ");
+        }else{
+            System.out.print("N"+" ");
+        }
+        if(A4 != 0){
+            System.out.print(A4/count+"."+(int)((A4%count*100/count+5)/10)+" ");
+        }else{
+            System.out.print("N"+" ");
+        }
+        if(A5 != 0){
+            System.out.print(A5);
+        }else{
+            System.out.print("N");
+        }
+    }
+}*/
+//41：判断是否平衡
+/*public class Main{
+    public static boolean isBalance(TreeNode root){
+        if(root == null){
+            return true;
+        }
+        int leftHeight = getTreeHeight(root.left);
+        int rightHeight = getTreeHeight(root.right);
+        if(Math.abs(leftHeight - rightHeight) > 1){
+            return false;
+        }
+        return isBalance(root.left) && isBalance(root.right);
+    }
+
+    public static int getTreeHeight(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        return Math.max(getTreeHeight(root.left), getTreeHeight(root.right)) + 1;
+    }
+}*/
+//40：划分列表：大的在该节点的后面，小的在该节点的前面
+/*public class Main{
     public static void main(String[] args) {
         ListNode head=new ListNode(7);
         head.next=new ListNode(6);
@@ -48,7 +146,7 @@ public class Main{
         cur1.next=newHead.next;
         return pHead;
     }
-}
+}*/
 //39：红包金额，找出大于数组一半的数字：
 /*public class Main{
     public static void main(String[] args) {
@@ -234,6 +332,20 @@ public class Main{
 * 3：取出前K个单词
 * 总结：前K个最大的，进行创建小堆的优先级队列：这样留下来的优先级队列中就是最大的元素
 *       前k个最小的，进行创建大堆的优先级队列：这样留下来的是优先级队列最小的元素*/
+/*方法1：
+* 1：统计单词出现的的次数
+* 2：创建Map键值对<单词，单词出现的次数>，进行排序--》必须实现Comparetor接口，重写比较器
+* 3：取前K个排序结果中值
+* 方法2：
+* 1：统计单词出现的次数
+* 2：创建Map键值对<单词，单词出现的次数>，次数进行比较，创建一个大堆
+* 3：直接取前K个元素即可
+* 方法3：
+* 1：先用前K个元素建堆
+* 2：用有序的元素依次和堆顶进行比较
+*    2.1：如果比堆顶元素小--》舍弃
+*    2.2：如果比堆顶元素大--》直接替换堆顶元素--》堆需要向下调整(删除堆顶元素，将该元素插入)
+* */
 /*class Cmp implements Comparator<Map.Entry<String,Integer>>{
 
     @Override
