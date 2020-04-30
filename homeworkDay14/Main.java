@@ -1,9 +1,3 @@
-import homework.Day14;
-import org.junit.Test;
-import sun.reflect.generics.tree.Tree;
-import sun.swing.PrintColorUIResource;
-
-import java.math.*;
 import java.util.*;
 abstract class Aniaml{
     abstract void say();
@@ -24,9 +18,102 @@ class TreeNode{
         this.val=val;
     }
 }
-public class Main{
-    
+//45：输出给定整数的各个位置的数字之和；还有平方后的各个数字之和
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        while(input.hasNextInt()) {
+            int n = input.nextInt();
+            int m = n * n;
+            int sum1 = 0;
+            int sum2 = 0;
+            while (n > 0) {
+                sum1 += n % 10;
+                n = n / 10;
+            }
+            while (m > 0) {
+                sum2 += m % 10;
+                m = m / 10;
+            }
+            System.out.println(sum1 + " " + sum2);
+        }
+    }
 }
+//44：输出的是人命币格式：
+/*public class Main{
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        double n=sc.nextDouble();
+        String a=n+" ";
+        char[]b=a.toCharArray();
+
+    }
+}*/
+//43：求GPA
+/*public class Main{
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        double[]num=new double[n];//记录学分的
+        double[]sum=new double[n];//记录绩点的
+        double s1=0;
+        double s2=0;
+        for (int i = 0; i <num.length ; i++) {
+            num[i]=sc.nextDouble();
+            s1+=num[i];//学分总和
+        }
+        for (int j= 0; j <sum.length ; j++) {
+            int temp=sc.nextInt();
+            if(temp>=90&&temp<=100)
+            {
+                sum[j]=num[j]*4.0;
+
+            }
+            if(temp>=85&&temp<=89)
+            {
+                sum[j]=num[j]*3.7;
+
+            }
+            if(temp>=82&&temp<=84)
+            {
+                sum[j]=num[j]*3.3;
+
+            }
+            if(temp>=78&&temp<=81)
+            {
+                sum[j]=num[j]*3.0;
+
+            }
+            if(temp>=75&&temp<=77)
+            {
+                sum[j]=num[j]*2.7;
+
+            }
+            if(temp>=72&&temp<=74)
+            {
+                sum[j]=num[j]*2.3;
+            }
+            if(temp>=68&&temp<=71)
+            {
+                sum[j]=num[j]*2.0;
+            }
+            if(temp>=64&&temp<=67)
+            {
+                sum[j]=num[j]*1.5;
+            }
+            if(temp>=60&&temp<=63)
+            {
+                sum[j]=num[j]*1.0;
+            }
+            if(temp<60)
+            {
+                sum[j]=num[j]*0;
+            }
+            s2+=sum[j];
+        }
+        System.out.printf("%.2f",s2/s1);
+        }
+    }*/
 //42：给定N个整数，按题目要求计算A1~A5并在一行中输出，若某类数字不存在，则输出“N”;
 /*public class Main{
     public static void main(String[] args) {
