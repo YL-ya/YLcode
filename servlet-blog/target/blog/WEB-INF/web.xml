@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <welcome-file-list>
+        <!--将我们项目的根路径/:映射到配置的URL中-->
+        <welcome-file>jsp/articleList.jsp</welcome-file>
+        <!--这样配置之后，直接访问到部署的项目名就能访问到这里了-->
+        <!--以前是http://localhost:8080/blog/jsp/articleList.jsp-->
+        <!--现在只用是http://localhost:8080/blog就可以直接访问到articleList.jsp界面了-->
+    </welcome-file-list>
+</web-app>
