@@ -119,7 +119,7 @@
 		// 获取文章列表数据
 		$.get('articleList?id=1', function(json) {
 			if(json.success){
-				var data = json.data;
+				var data = json.data;//这块就是文章列表的那个数组
 				var contents = "";
 				for(var i in data){
 					contents += '<div id="article_div'+data[i].id+'" class="input-group">';
@@ -136,6 +136,7 @@
 				resetArticleBtns();
 			}else{
 				alert("文章列表获取失败："+json.message);
+				//打开URL的时候，文章列表没有解析出来，报错该错，是后端正确的以json数据格式已经发过来了，但是前端代码解析错误
 			}
 		});
 

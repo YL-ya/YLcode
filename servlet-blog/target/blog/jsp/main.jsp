@@ -15,8 +15,9 @@
     <title>Title</title>
     <base href="<%=basePath%>">
     <link href="static/css/app.css" rel="stylesheet"><!--样式：css文件，可以渲染背景等或者字体大小-->
-    <!-- jQuery --><!--客户端编码的基本认-->
+    <!-- jQuery --><!--客户端编码的基本认识-->
     <script type="text/javascript" src="static/jquery/jquery-1.12.4.min.js"></script>
+    <!--上面是引入jQuery这个文件库-->
     <script type="text/javascript">
         $(document).ready(function () {//绑定页面加载事件，在加载完之后执行
             //alert("jsp文件加载完成")
@@ -27,11 +28,11 @@
                 data:{"username":"abc","password":"123"},//请求的数据
                 dataType:"json",//响应的数据格式
                 success:function (data) {//返回的状态码是200，也就是请求成功的状态时，条用这个函数
-                } 
+                }
             });
             $("#btn").click(function () {//绑定按钮的点击事件
                 //alert("点击按钮");
-                //在这里紫萼的话就是，点击按钮，来请求的服务的代码
+                //在这里话就是，点击按钮，来请求的服务的代码
             });
         });
     </script>

@@ -14,4 +14,7 @@ public class Article {
     private String content;
     private Integer userId;
     private Date createTime;
+
+    //新增文章时传入的字段
+    private String userAccout;
 }
