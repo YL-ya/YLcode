@@ -19,13 +19,22 @@ public class ArticleDetailServlet extends AbstractBaseServlet {
         //但是前面的那个添加文章的报头里面添加了Content-type字段：application/json类型的，要用输入流进行转化
 
         //因为传进来的id可能是null
+        Integer articleId;
         try {
-            Integer articleId = Integer.parseInt(id);
-            return testData();//测试代码以后替换成数据库(根据文章id)查询文章的操作
+            articleId=Integer.parseInt(id);
+            //Integer articleId = Integer.parseInt(id);
+            /*if(articleId==1){
+                int i=11/0;
+            }*/
+            //return testData();//测试代码以后替换成数据库(根据文章id)查询文章的操作
 
         }catch (Exception e){
-            throw new ClientException("001","请求参数错误：id="+id);
+            throw new ClientException("001","请求参数错误：【id="+id+"】");
         }
+        if(articleId==1){
+            int i=11/0;
+        }
+        return testData();
     }
 
     public static Article testData(){

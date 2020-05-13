@@ -18,6 +18,10 @@ public class ArticleAddServlet extends AbstractBaseServlet {
         *    现在是文章，要用输入流进行获得
         * 2：获得InputStream输入流(json格式的字符串)后解析成java对象*/
         InputStream is=req.getInputStream();//这里获得的是输入流(io流，也就是要将IO流转成字符串)
+
+        //http请求发过来的Content-Type为application/json,求青提李曼是json的字符串，我们要反序列化为java对象
+        //需要检查json字符串的键值对，必须和java类的属性保持一致，
+        //也就是能够进行匹配(java对象里面的属性只能多不能少)，如果json里面的字段，java里面没有就会报错
         Article article= JSONUtil.deserialize(is, Article.class);
 
         //模拟数据库插入数据操作
