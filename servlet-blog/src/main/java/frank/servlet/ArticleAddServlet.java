@@ -17,6 +17,8 @@ public class ArticleAddServlet extends AbstractBaseServlet {
         /*1：获得数据格式，以前获得前端给过来的数据密码和iD是用req.getParameter()获得的字符串
         *    现在是文章，要用输入流进行获得
         * 2：获得InputStream输入流(json格式的字符串)后解析成java对象*/
+
+        //文章添加，请求数据中包含title,content,userAccount
         InputStream is=req.getInputStream();//这里获得的是输入流(io流，也就是要将IO流转成字符串)
 
         //http请求发过来的Content-Type为application/json,求青提李曼是json的字符串，我们要反序列化为java对象
