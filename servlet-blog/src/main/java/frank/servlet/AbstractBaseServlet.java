@@ -19,10 +19,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class AbstractBaseServlet extends HttpServlet {
 
     //统计访问量：用Map结构：会引起多线程安全;用ConcurrentMap即可，保证线程安全
-    private static final ConcurrentMap<String ,Integer> MapCount=new ConcurrentHashMap<>();
+    private static final ConcurrentMap<String ,Integer> Map1=new ConcurrentHashMap<>();
 
     //高阶线程的Api:
-    private static final ConcurrentMap<String, AtomicInteger> MapCount1=new ConcurrentHashMap<>();
+    private static final ConcurrentMap<String, AtomicInteger> Map2=new ConcurrentHashMap<>();
 
 
     @Override
@@ -71,21 +71,34 @@ public abstract class AbstractBaseServlet extends HttpServlet {
         //还有没有线程安全的问题：
         //ConcurrentMap只是put和get方法是线程安全的:也就是说整块代码是不具有安全的；所以整段代码要进行加锁
         //方法1：通过synchronized保证代码块的原子性
-        synchronized (MapCount) {
+        synchronized (Map1) {
             String path = req.getServletPath();
-            Integer count = MapCount.get(path);
+            Integer count = Map1.get(path);
             if (count == null) {
                 count = 1;
             } else {
                 count++;
             }
-            MapCount.put(path, count);
+            Map1.put(path, count);
         }
 
         //方法2：通过AtomicInteger结合ConcurrentHashMap来保证线程安全：效率比较高
         String path = req.getServletPath();
-        AtomicInteger count = MapCount1.putIfAbsent(path,new AtomicInteger());
-        count.incrementAndGet();//进行++操作(线程安全的)
+        /*AtomicInteger count = MapCount1.putIfAbsent(path,new AtomicInteger(1));
+        count.incrementAndGet();//进行++操作(线程安全的)*/
+        AtomicInteger count=Map2.putIfAbsent(path,new AtomicInteger(1));
+        if(count!=null){
+            //因为这里可能返回的null，如果不进行判断的话，直接报错(空指针异常)
+            count.incrementAndGet();
+        }
     }
     public abstract Object process (HttpServletRequest req, HttpServletResponse resp) throws Exception;
+
+    public static ConcurrentMap<String, Integer> getMap1() {
+        return Map1;
+    }
+
+    public static ConcurrentMap<String, AtomicInteger> getMap2() {
+        return Map2;
+    }
 }
