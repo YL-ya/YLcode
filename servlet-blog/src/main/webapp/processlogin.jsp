@@ -7,10 +7,22 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page pageEncoding="UTF-8"%>
-<%
-    String username=request.getParameter("username");
+
+<!--这里就相当于用javabean创建了一个对象实例放在了session中-->
+<jsp:useBean id="user" class="frank.javabean.UserBean" scope="session"/>
+
+<jsp:setProperty name="user" property="uername" param="username"/>
+<jsp:setProperty name="user" property="password" param="password"/>
+<jsp:setProperty name="user" property="*"/>
+<!--这里可以通过传入*实现自定义的绑定，前提条件就是名字的一致-->
+
+
+    <%
+    /*String username=request.getParameter("username");
     String password=request.getParameter("password");
-    if(username!=null&&username.equals("admin")&&password!=null&&password.equals("123456")) {
+    //这里可以 用javabean的动作标签实现
+    */
+    if(user.getUsername()!=null&&user.getPassword().equals("admin")&&user.getPassword()!=null&&user.getPassword().equals("123456")) {
         /*//标签实现转发：<!--全部满足的时候，jsp:forward page="success.jsp"/>才会返回到成功页面-->
         RequestDispatcher d=request.getRequestDispatcher("success.jsp");
         d.forward(request,response);//java脚本语言实现转发
