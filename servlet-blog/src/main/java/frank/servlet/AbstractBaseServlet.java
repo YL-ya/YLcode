@@ -84,7 +84,7 @@ public abstract class AbstractBaseServlet extends HttpServlet {
 
         //方法2：通过AtomicInteger结合ConcurrentHashMap来保证线程安全：效率比较高
         String path = req.getServletPath();
-        /*AtomicInteger count = MapCount1.putIfAbsent(path,new AtomicInteger(1));
+        /*AtomicInteger count = MapCount1.putIfAbsent(path,new AtomicInteger(1 ));
         count.incrementAndGet();//进行++操作(线程安全的)*/
         AtomicInteger count=Map2.putIfAbsent(path,new AtomicInteger(1));
         if(count!=null){

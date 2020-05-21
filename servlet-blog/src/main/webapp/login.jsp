@@ -13,7 +13,7 @@
 </head>
 <body>
     <h1>请登录!</h1>
-    <form action="processlogin.jsp" mothod="POST">
+    <form action="login" >
         用户名：<input name="username" type="text" placeholder="请输入用户名"><br>
         密码：<input name="password" type="password" placeholder="请输入密码"><br>
         <input type="submit" value="提交">
