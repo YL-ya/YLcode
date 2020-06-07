@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--定义一个bean对象，默认的是使用无参的构造方法-->
+    <bean id="duck1" class="yl.model.Duck">
+        <property name="name" value="LadyGaga"/>
+        <property name="age" value="10"/>
+    </bean>
+
+    <!--通过构造方法定义Bean对象-->
+    <bean id="duck2" class="yl.model.Duck">
+        <constructor-arg name="name" value="烤鸭"/>
+        <constructor-arg name="age" value="2"/>
+    </bean>
+
+    <bean>
+        
+    </bean>
+</beans>

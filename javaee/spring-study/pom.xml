@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>spring-study</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.2.3.RELEASE</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>spring</finalName>
+        <!--一般打成war都要修改该名字：因为版本号的变化，都会有影响，
+             因为默认是以artifactId里面的进行命名的-->
+        <plugins>
+            <plugin><!--一般的maven项目都需要指定jdk的版本以及编码的格式
+                         调整jdk1.8，默认是1.5，版本太低了-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>utf-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
