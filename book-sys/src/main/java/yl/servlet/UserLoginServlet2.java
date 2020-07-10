@@ -11,9 +11,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
-@WebServlet("/user/login")
-public class UserLoginServlet2 extends HttpServlet {
+@WebServlet("/user/login2")
+public class UserLoginServlet2 extends AbstractBaseServlet {
     @Override
+    public Object process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        return null;
+    }
+    /*   @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
     }
@@ -34,5 +38,5 @@ public class UserLoginServlet2 extends HttpServlet {
         PrintWriter pw=resp.getWriter();
         pw.print(new ObjectMapper().writeValueAsString(r));//将json格式转换成字符串，返回到前端
         pw.flush();
-    }
+    }*/
 }
