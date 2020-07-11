@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Student {
+public class Student extends DictionaryTag {
     
     private Integer id;
 

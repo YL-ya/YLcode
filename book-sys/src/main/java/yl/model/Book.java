@@ -10,7 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class Book {
+public class Book extends DictionaryTag {
     private Integer id;
     private String bookName;
     private String author;
