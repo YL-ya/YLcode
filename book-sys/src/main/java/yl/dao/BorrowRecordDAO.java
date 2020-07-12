@@ -165,6 +165,5 @@ public class BorrowRecordDAO {
             DBUtil.close(c,ps,rs);
         }
         return br;
-
     }
 }

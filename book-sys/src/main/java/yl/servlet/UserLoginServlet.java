@@ -1,33 +1,35 @@
 package yl.servlet;
 
+import yl.dao.UserDAO;
+import yl.exception.BusinessException;
+import yl.model.User;
+import yl.util.JSONUtil;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet("/user/login")
-public class UserLoginServlet extends HttpServlet {
+public class UserLoginServlet extends AbstractBaseServlet{
+
+    //通过后台进行过滤器过滤
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
-    }
+    public Object process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        //通过流进行解析：
+        User user= JSONUtil.read(req.getInputStream(),User.class);//http请求解析的用户数据
+        User queryUser= UserDAO.query(user);//通过请求的用户名密码在数据库中进行查询，获取用户
+        if(queryUser==null){
+            throw new BusinessException("000000","用户密码校验失败");
+        }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");//设置请求编码，针对请求体，注意url中是没有效果的
-        resp.setCharacterEncoding("UTF-8");//针对响应体设置编码
-        resp.setContentType("text/html");//设置响应的数据格式，响应头content-type告诉浏览器怎么解析
-
-        //前端抓包，看到有k=v这样的数据(url,请求体)，但是key一定要一致
-        String username=req.getParameter("username");
-        String password=req.getParameter("password");
-        System.out.printf("用户名=%s,密码=%s\n",username,password);
-
-        PrintWriter pw=resp.getWriter();
-        pw.print("登陆成功");
-        pw.flush();
+        //不为空的话，就说明数据库中有
+        HttpSession session=req.getSession();
+        session.setAttribute("user",queryUser);
+        return null;//响应成功
     }
 }
