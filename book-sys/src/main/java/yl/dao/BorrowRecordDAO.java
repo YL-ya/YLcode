@@ -7,9 +7,7 @@ import yl.model.Classes;
 import yl.model.Student;
 import yl.util.DBUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -165,5 +163,79 @@ public class BorrowRecordDAO {
             DBUtil.close(c,ps,rs);
         }
         return br;
+    }
+
+    public static int insert(BorrowRecord record) {
+        //插入图书借阅信息
+        Connection c=null;
+        PreparedStatement ps=null;
+
+        try {
+            c=DBUtil.getConnection();
+            String sql="insert borrow_record(book_id,student_id,start_time,end_time)values (?, ?, ?, ?)";
+            ps=c.prepareStatement(sql);
+            ps.setInt(1,record.getBookId());
+            ps.setInt(2,record.getStudentId());
+            ps.setTimestamp(3,new Timestamp(record.getStartTime().getTime()));
+            ps.setTimestamp(4,new Timestamp(record.getEndTime().getTime()));
+            return ps.executeUpdate();//直接返回的是插入的条数
+        } catch (Exception e) {
+            throw new SystemException("000011","插入图书借阅信息出错",e);
+        }finally {
+            DBUtil.close(c,ps);
+        }
+    }
+
+    public static int update(BorrowRecord record) {
+        //更新图书查阅信息
+        Connection c=null;
+        PreparedStatement ps=null;
+
+        try {
+            c=DBUtil.getConnection();
+            //通过id条件去修改图书借阅信息
+            String sql="update borrow_record set book_id=?,student_id=?,start_time=?,end_time=? where id=?";
+            ps=c.prepareStatement(sql);
+            ps.setInt(1,record.getBookId());
+            ps.setInt(2,record.getStudentId());
+            ps.setTimestamp(3,new Timestamp(record.getStartTime().getTime()));
+            ps.setTimestamp(4,new Timestamp(record.getEndTime().getTime()));
+            ps.setInt(5,record.getId());
+            return ps.executeUpdate();//直接返回的是插入的条数
+        } catch (Exception e) {
+            throw new SystemException("000012","修改图书借阅信息出错",e);
+        }finally {
+            DBUtil.close(c,ps);
+        }
+    }
+
+    public static int delete(String[] ids) {
+        //删除图书借阅信息：根据ids数组进行删除
+        Connection c=null;
+        PreparedStatement ps=null;
+
+        try {
+            c=DBUtil.getConnection();
+            StringBuilder sql=new StringBuilder("delete from borrow_record where id in (");
+            for (int i = 0; i <ids.length ; i++) {
+                if(i!=0){
+                    sql.append(",");//除了第一个位置不加逗号
+                }
+                sql.append("?");
+            }
+            sql.append(")");
+
+            ps=c.prepareStatement(sql.toString());
+
+            for (int i = 0; i <ids.length ; i++) {
+                ps.setInt(i+1,Integer.parseInt(ids[i]));
+
+            }
+            return ps.executeUpdate();//直接返回的是插入的条数
+        } catch (Exception e) {
+            throw new SystemException("000013","删除图书借阅信息出错",e);
+        }finally {
+            DBUtil.close(c,ps);
+        }
     }
 }
