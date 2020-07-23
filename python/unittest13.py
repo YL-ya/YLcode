@@ -19,6 +19,8 @@ class Baidui1(unittest.TestCase):
         self.driver.quit()
         self.assertAlmostEqual([],self.verificationErrors)
 
+    # 跳过测试方法的执行
+    @unittest.skip("skipping")
     # 在写单元测试的时候必须以test_开头
     def test_baidusearch(self):
         driver = self.driver
