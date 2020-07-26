@@ -13,7 +13,7 @@ public class Message {
     private int messageId;
     private int userId;
     private int channelId;
-    private String context;
+    private String content;
     private Timestamp sendTime;
 
     //在此处新加一个字段：此处的nickName就和userId是对应的
