@@ -1,0 +1,42 @@
+//重建二叉树：
+//思路:
+//1：先在前序遍历结果的数组中取出第一个节点当成根节点
+//2：在遍历中序遍历结果，将各节点找出来，分成两个新的区间，然后递归重建二叉树即可
+import java.util.*;
+public class Solution {
+    public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
+        if(pre.length==0||in.length==0){
+            return null;
+        }
+        //思路：取出前序中的根节点，然后继续遍历，当成左右子树的根节点
+        //然后找到中序遍历结果中的根节点，分成左右子树
+        TreeNode root=new TreeNode(pre[0]);
+        
+        //在中序遍历结果中找到跟：
+        for(int i=0;i<in.length;i++){
+            if(in[i]==pre[0]){
+                root.left=reConstructBinaryTree(Arrays.copyOfRange(pre,1,i+1),Arrays.copyOfRange(in,0,i));
+                root.right=reConstructBinaryTree(Arrays.copyOfRange(pre,i+1,pre.length),Arrays.copyOfRange(in,i+1,in.length));
+                break;
+            }
+        }
+        return root;
+    }
+}
+
+//二进制中数字1的个数：
+//思路：
+//1：暴力法，直接循环遍历计算++即可
+//2：简单法：和暴力差不多：就是使用字符串，将其变成一个二进制的字符串
+public class Solution {
+    public int NumberOf1(int n) {
+        String s=Integer.toBinaryString(n);
+        int count=0;
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='1'){
+                count++;
+            }
+        }
+        return count;
+    }
+}
