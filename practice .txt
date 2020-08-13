@@ -40,3 +40,26 @@ public class Solution {
         return count;
     }
 }
+
+//求一个数的指数：
+public class Solution {
+    public double Power(double base, int exponent) {
+        //在这里要考虑指数的正负
+        //1:当底数为0的时候，不管怎么样都是0
+        if(base==0.0){
+            return 0.0;
+        }
+        //2：当指数为正的时候，乘以指数的次数即可
+        double result=1;
+        int e=Math.abs(exponent);
+        while(e!=0){
+            result=result*base;
+            e--;
+        }
+        //3：当指数为符的情况，坟墓就是为正的情况下的
+        if(exponent<0){
+            result=1/result;
+        }
+        return result;
+  }
+}
