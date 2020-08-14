@@ -63,3 +63,21 @@ public class Solution {
         return result;
   }
 }
+
+//在字符串1中求出出现字符串2的次数
+
+//求字符串中对应字符出现的次数
+    public static void main(String[] args){
+        String str="dajhudanudhahdiancijaniahnkaio";
+        Map<Character,Integer> map=new HashMap<Character,Integer>();
+        //将字符串转成字符数组进行遍历
+        char[]arr=str.toCharArray();
+        for(char ch:arr){
+            if(map.containsKey(ch)){
+                int count=map.get(ch);
+                map.put(ch,count+1);
+            }else{
+                map.put(ch,1);
+            }
+        }
+    }
