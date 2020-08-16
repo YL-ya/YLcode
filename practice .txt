@@ -447,3 +447,81 @@ public class Solution {
         return ((double)arr.get(index-1)+(double)arr.get(index))/2;
     }
 }
+
+//按链表从尾到头的顺序返回一个ArrayLis：
+//思路1：将链表头插就可以，利用list.add(0,cur.val)；即可
+//思路2：因为是逆序，也就是回想到用栈，先进的后出即可
+import java.util.ArrayList;
+public class Solution {
+    //思路：从尾到头，也就是相当于顺序表中的尾插法
+    public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
+        ArrayList<Integer> list=new ArrayList<Integer>();
+        ListNode cur=listNode;
+        while(cur!=null){
+            list.add(0,cur.val);//每次都在0号位置进行插入
+            cur=cur.next;
+        }
+        return list;
+    }
+}
+
+//字符串替换空格：
+//思路1：利用java中String自带的替换方法
+str.toString().replace(" ","%20");
+//思路2：直接进行append，到替换的位置就将替换好的进行append即可
+StringBuffer str1=new StringBuffer();
+        for(int i=0;i<str.length();i++){
+            char c=str.charAt(i);
+            if(c==' '){
+                str1.append("%20");
+            }else{
+                str1.append(c);
+            }
+        }
+        return str1.toString();
+}
+
+//顺时针打印矩阵
+//思路：定义四个指针进行先向右，再向下，再向左，再向上进行遍历打出即可
+import java.util.ArrayList;
+public class Solution {
+    //按顺时针打印：先右，再下，再左，在上
+    public ArrayList<Integer> printMatrix(int [][] matrix) {
+        ArrayList<Integer> result = new ArrayList<>();
+        if(matrix == null){
+            return result;
+        }
+        int low = 0;
+        int high = matrix.length-1;
+        int left = 0;
+        int right = matrix[0].length-1;
+        while(low <= high && left <= right){
+ 
+            //向右
+            for(int i=left; i <= right; i++)
+                result.add(matrix[low][i]);
+ 
+            //向下
+             for(int i = low+1; i <= high; i++)
+                 result.add(matrix[i][right]);
+ 
+            //向左 有可能出现特殊的情况只有一行，为了避免重复访问
+            if(low < high){
+                for(int i= right-1; i >= left; i--)
+                result.add(matrix[high][i]);
+            }
+ 
+            //向上 有可能出现特殊的情况只有一列，为了避免重复访问
+            if(left < right){
+                for(int i = high-1; i >= low+1; i--)
+                result.add(matrix[i][left]);
+            }
+ 
+            low++;
+            high--;
+            left++;
+            right--;
+        }
+        return result;
+    }
+}
