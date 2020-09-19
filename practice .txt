@@ -583,3 +583,37 @@ public class Solution {
         return result;
     }
 }
+
+//最小的K个数
+//方法1：先进行排序，然后选出前k个数
+import java.util.*;
+public class Solution {
+    public ArrayList<Integer> GetLeastNumbers_Solution(int [] input, int k) {
+        ArrayList<Integer> ls=new ArrayList<>();
+        if(input==null||input.length<k){
+            return ls;
+        }
+        Arrays.sort(input);
+        for(int i=0;i<k;i++){
+            ls.add(input[i]);
+        }
+        return ls;
+    }
+}
+
+//连续子序列和最大
+//思路：选与不选：
+import java.util.*;
+public class Solution {
+    public int FindGreatestSumOfSubArray(int[] array) {
+    //思路：利用动态规划：选与不选
+        //也就是最大值是当前这个数，和当前这个数+前面的数的最大值
+        int max=array[0];
+        int res=array[0];
+        for(int i=1;i<array.length;i++){
+            max=Math.max(max+array[i],array[i]);
+            res=Math.max(res,max);
+        }
+        return res;
+    }
+}
